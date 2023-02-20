@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CssBaseline } from '@mui/material';
 
 // import { AppThemeProvider } from 'context/Color';
-// import AppRoutes from 'routes';
+import AppRoutes from 'routes';
 
 const App = () => {
   return (
@@ -13,8 +13,7 @@ const App = () => {
     <Router>
       <ToastContainer autoClose={2000} />
       <CssBaseline enableColorScheme />
-      {'Financial-UI'}
-      {/* <AppRoutes /> */}
+      <AppRoutes />
     </Router>
     // </AppThemeProvider>
   );
