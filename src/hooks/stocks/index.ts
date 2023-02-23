@@ -1,21 +1,45 @@
 import { useState } from 'react';
 
-import myStocks from 'mocks/stocks';
 import { api } from 'services/api';
-import { Stock } from 'components/grid';
 import { round, split } from 'utils/functions';
+
+import { defaultStocks } from 'mocks/stocks';
+
+interface Stock {
+  currency: string;
+  symbol: string;
+  shortName: string;
+  logourl: string;
+  regularMarketPrice: number;
+  regularMarketChangePercent: number;
+  regularMarketChange: number;
+}
+
+export type { Stock };
 
 export default function useStocks() {
   const [stocks, setStocks] = useState<Stock[] | []>([]);
 
-  const fetchStocks = async () => {
+  const fetchStocks = async (myStocks: string[] = defaultStocks) => {
     try {
-      const { data } = await api.get(`/api/quote/${myStocks}`);
+      const { data } = await api.get(`/api/quote/${myStocks}`, {
+        params: {
+          range: '1d',
+          interval: '1d',
+          fundamental: true,
+          dividends: true,
+        },
+        paramsSerializer: {
+          indexes: null,
+        },
+      });
 
       const stocks: Stock[] = data?.results?.map((stock: Stock) => {
         return {
+          currency: stock.currency,
           symbol: stock.symbol,
           shortName: split(stock.shortName),
+          logourl: stock.logourl,
           regularMarketPrice: stock.regularMarketPrice,
           regularMarketChangePercent: round(stock.regularMarketChangePercent),
           regularMarketChange: round(stock.regularMarketChange),
