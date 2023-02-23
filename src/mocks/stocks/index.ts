@@ -11,4 +11,6 @@ const myStocks = [
   'AMER3',
 ];
 
-export default myStocks;
+const defaultStocks = ['PETR4', 'MGLU3'];
+
+export { myStocks, defaultStocks };
