@@ -1,12 +1,7 @@
 import StocksGrid from 'components/grid';
 
 const AppRoutes = () => {
-  return (
-    <>
-      {'Financial-UI'}
-      <StocksGrid />
-    </>
-  );
+  return <StocksGrid />;
 };
 
 export default AppRoutes;

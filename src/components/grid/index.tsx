@@ -1,31 +1,39 @@
 import * as React from 'react';
-import { Button, Grid, Paper, Typography, Chip, Toolbar } from '@mui/material';
+import { Button, Grid, Paper, Typography, Chip, Toolbar, Avatar } from '@mui/material';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
-import Stocks from 'hooks/stocks';
+import Stocks, { Stock } from 'hooks/stocks';
+import Cryptos from 'hooks/cryptos';
 
-interface Stock {
-  symbol: string;
-  shortName: string;
-  regularMarketPrice: number;
-  regularMarketChangePercent: number;
-  regularMarketChange: number;
-}
-
-export type { Stock };
+import { myStocks } from 'mocks/stocks';
+import currencies from 'mocks/currencies';
+import Header from 'layout/header';
 
 export default function StocksGrid() {
-  const { stocks, fetchStocks: HandleClickShowStocks } = Stocks();
+  const { stocks, fetchStocks } = Stocks();
+  const { cryptos, fetchCryptos } = Cryptos();
+  console.log('🚀 ~ file: index.tsx:11 ~ StocksGrid ~ cryptos', cryptos);
+
+  const handleClickShowStocks = async () => {
+    await fetchStocks(myStocks);
+    await fetchCryptos();
+  };
 
   return (
     <>
-      <Button variant="outlined" onClick={HandleClickShowStocks} children={'Stocks'} />
+      <Header>
+        <Button variant="contained" onClick={handleClickShowStocks}>
+          {'Stocks'}
+        </Button>
+      </Header>
       <Toolbar />
       <Grid container spacing={2}>
         {stocks.map(
           ({
+            currency,
             symbol,
             shortName,
+            logourl,
             regularMarketPrice: price,
             regularMarketChangePercent: changePercent,
             regularMarketChange: change,
@@ -45,7 +53,8 @@ export default function StocksGrid() {
                   <Grid item xs={12} sm container>
                     <Grid item xs container direction="column" spacing={2}>
                       <Grid item xs>
-                        <Typography gutterBottom variant="subtitle1" component="div">
+                        <Avatar src={logourl} />
+                        <Typography variant="subtitle1" gutterBottom>
                           {shortName}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
@@ -57,20 +66,20 @@ export default function StocksGrid() {
                           <Chip
                             color="success"
                             icon={<ArrowUpward />}
-                            label={`R$ ${change} (% ${changePercent})`}
+                            label={`${currencies[currency]} ${change} (% ${changePercent})`}
                           />
                         ) : (
                           <Chip
                             color="error"
                             icon={<ArrowDownward />}
-                            label={`R$ ${change} (% ${changePercent})`}
+                            label={`${currencies[currency]} ${change} (% ${changePercent})`}
                           />
                         )}
                       </Grid>
                     </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1" component="div">
-                        R$ {price}
+                      <Typography variant="subtitle1">
+                        {`${currencies[currency]} ${price}`}
                       </Typography>
                     </Grid>
                   </Grid>
