@@ -6,6 +6,7 @@ import { round, split } from 'utils/functions';
 import { defaultStocks } from 'mocks/stocks';
 
 interface Stock {
+  id: number;
   currency: string;
   symbol: string;
   shortName: string;
@@ -34,8 +35,9 @@ export default function useStocks() {
         },
       });
 
-      const stocks: Stock[] = data?.results?.map((stock: Stock) => {
+      const stocks: Stock[] = data?.results?.map((stock: Stock, index: number) => {
         return {
+          id: index + 1,
           currency: stock.currency,
           symbol: stock.symbol,
           shortName: split(stock.shortName),
@@ -46,6 +48,7 @@ export default function useStocks() {
         };
       });
 
+      console.log('🚀 ~ file: index.ts:55 ~ fetchStocks ~ stocks', stocks);
       setStocks(stocks);
     } catch (err) {
       console.log('🚀 ~ file: index.ts:34 ~ fetchStocks ~ err', err);

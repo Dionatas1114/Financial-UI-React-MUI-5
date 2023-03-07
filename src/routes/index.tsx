@@ -1,7 +1,7 @@
-import StocksGrid from 'components/grid';
+import Main from 'layout/main';
 
 const AppRoutes = () => {
-  return <StocksGrid />;
+  return <Main />;
 };
 
 export default AppRoutes;
