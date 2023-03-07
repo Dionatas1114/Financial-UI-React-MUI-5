@@ -59,9 +59,8 @@ const Header = ({ children }: HeaderProps) => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+            children={<MenuIcon />}
+          />
           <Typography
             variant="h6"
             noWrap

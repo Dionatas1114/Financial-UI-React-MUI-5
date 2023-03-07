@@ -2,9 +2,11 @@ import { useState } from 'react';
 
 import myCryptos from 'mocks/cryptos';
 import { api } from 'services/api';
-import { round } from 'utils/functions';
+import { round, split } from 'utils/functions';
 
 interface Crypto {
+  id: number;
+  currency: string;
   coinName: string;
   regularMarketPrice: number;
   regularMarketChangePercent: number;
@@ -28,11 +30,13 @@ export default function useCryptos() {
           indexes: null,
         },
       });
-      console.log('🚀 ~ file: index.ts:23 ~ fetchCryptos ~ data', data);
+      console.log('🚀 ~ file: index.ts:23 ~ fetchCryptos ~ data', data.coins);
 
-      const cryptos: Crypto[] = data?.coins?.map((crypto: Crypto) => {
+      const cryptos: Crypto[] = data?.coins?.map((crypto: Crypto, index: number) => {
         return {
-          coinName: crypto.coinName,
+          id: index + 1,
+          currency: crypto.currency,
+          coinName: split(crypto.coinName),
           regularMarketPrice: round(crypto.regularMarketPrice),
           regularMarketChangePercent: round(crypto.regularMarketChangePercent),
           regularMarketChange: round(crypto.regularMarketChange),
