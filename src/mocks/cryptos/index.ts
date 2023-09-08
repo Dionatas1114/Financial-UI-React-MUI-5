@@ -1,3 +1,3 @@
-const myCryptos = ['ETH', 'BTC'];
+const myCryptos = ['ETH', 'BTC', 'UNFI'];
 
 export default myCryptos;
