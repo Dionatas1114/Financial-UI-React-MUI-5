@@ -24,7 +24,7 @@ export default function useCryptos() {
       const { data } = await api.get('/api/v2/crypto', {
         params: {
           coin: myCryptos,
-          currency: 'BRL',
+          currency: 'USD',
         },
         paramsSerializer: {
           indexes: null,
