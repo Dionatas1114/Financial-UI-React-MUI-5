@@ -15,6 +15,10 @@ declare global {
     [string: string]: RegExp;
   }
 
+  interface ChildrenProps {
+    children: JSX.Element;
+  }
+
   namespace React {
     interface DOMAttributes<T> {
       onResize?: ReactEventHandler<T> | undefined;
