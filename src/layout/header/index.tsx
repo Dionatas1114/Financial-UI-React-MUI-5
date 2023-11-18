@@ -1,14 +1,8 @@
-import React from 'react';
-
 import { Box, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 import { Menu as MenuIcon, Search as SearchIcon } from '@mui/icons-material';
 import { SearchIconWrapper, StyledInputBase, Search } from './style';
 
-interface HeaderProps {
-  children: React.ReactElement;
-}
-
-const Header = ({ children }: HeaderProps) => {
+const Header = ({ children }: ChildrenProps) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
