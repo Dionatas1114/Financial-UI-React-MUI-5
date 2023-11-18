@@ -1,19 +1,20 @@
 import { Button, Grid, Toolbar } from '@mui/material';
 
-import Stocks, { Stock } from 'hooks/stocks';
+// import Stocks from 'hooks/stocks';
+// import { Stock } from 'hooks/stocks/type';
 import Cryptos, { Crypto } from 'hooks/cryptos';
 
-import { myStocks } from 'mocks/stocks';
+// import { myStocks } from 'mocks/stocks';
 import Header from 'layout/header';
 import CustomGrid from 'components/grid';
 
 export default function Main() {
-  const { stocks, fetchStocks } = Stocks();
+  // const { stocks, fetchStocks } = Stocks();
   const { cryptos, fetchCryptos } = Cryptos();
   console.log('🚀 ~ file: index.tsx:11 ~ StocksGrid ~ cryptos', cryptos);
 
   const handleClickShowStocks = async () => {
-    await fetchStocks(myStocks);
+    // await fetchStocks(myStocks);
     await fetchCryptos();
   };
 
@@ -27,8 +28,8 @@ export default function Main() {
       <Toolbar />
 
       {/* Stocks  */}
-      <Grid container spacing={2}>
-        {stocks.map(
+      {/* <Grid container spacing={2}>
+        {stocks?.map(
           ({
             id,
             currency,
@@ -54,11 +55,11 @@ export default function Main() {
           )
         )}
       </Grid>
-      <Toolbar />
+      <Toolbar /> */}
 
       {/* Cryptos  */}
       <Grid container spacing={2}>
-        {cryptos.map(
+        {cryptos?.map(
           ({
             id,
             currency,
