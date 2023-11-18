@@ -1,29 +1,17 @@
 import { useState } from 'react';
 
-import { api } from 'services/api';
+import { brapiApi } from 'services/api';
 import { round, split } from 'utils/functions';
 
 import { defaultStocks } from 'mocks/stocks';
-
-interface Stock {
-  id: number;
-  currency: string;
-  symbol: string;
-  shortName: string;
-  logourl: string;
-  regularMarketPrice: number;
-  regularMarketChangePercent: number;
-  regularMarketChange: number;
-}
-
-export type { Stock };
+import { Stock } from './type';
 
 export default function useStocks() {
-  const [stocks, setStocks] = useState<Stock[] | []>([]);
+  const [stocks, setStocks] = useState<Stock[]| []>([]);
 
   const fetchStocks = async (myStocks: string[] = defaultStocks) => {
     try {
-      const { data } = await api.get(`/api/quote/${myStocks}`, {
+      const { data } = await brapiApi.get(`/api/quote/${myStocks}`, {
         params: {
           range: '1d',
           interval: '1d',

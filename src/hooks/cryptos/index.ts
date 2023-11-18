@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import myCryptos from 'mocks/cryptos';
-import { api } from 'services/api';
+import { brapiApi } from 'services/api';
 import { round, split } from 'utils/functions';
 
 interface Crypto {
@@ -21,7 +21,7 @@ export default function useCryptos() {
 
   const fetchCryptos = async () => {
     try {
-      const { data } = await api.get('/api/v2/crypto', {
+      const { data } = await brapiApi.get('/api/v2/crypto', {
         params: {
           coin: myCryptos,
           currency: 'USD',
