@@ -1,9 +1,15 @@
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_API_URL;
+const brapiBaseURL = process.env.REACT_APP_BRAPI_API_URL || 'https://brapi.dev/';
 
-const api = axios.create({
-  baseURL,
-});
+const clientInstance = (baseURL: string, auth?: string) =>
+  axios.create({
+    baseURL,
+    params: {
+      apikey: auth,
+    },
+  });
 
-export { api, baseURL };
+const brapiApi = clientInstance(brapiBaseURL);
+
+export { brapiApi, brapiBaseURL };
