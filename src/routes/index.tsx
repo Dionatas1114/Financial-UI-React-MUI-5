@@ -1,7 +1,7 @@
 import Main from 'layout/main';
 
-const AppRoutes = () => {
+const Routes = () => {
   return <Main />;
 };
 
-export default AppRoutes;
+export default Routes;
