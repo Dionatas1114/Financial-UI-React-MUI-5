@@ -21,9 +21,7 @@ export default function Main() {
   return (
     <>
       <Header>
-        <Button variant="contained" onClick={handleClickShowStocks}>
-          {'Stocks'}
-        </Button>
+        <Button variant="contained" onClick={handleClickShowStocks} children={'Stocks'} />
       </Header>
       <Toolbar />
 

@@ -40,4 +40,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export { Search, SearchIconWrapper, StyledInputBase };
+const Children = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+}));
+
+export { Search, SearchIconWrapper, StyledInputBase, Children };
