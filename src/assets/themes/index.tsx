@@ -1,8 +1,8 @@
 import { useContext, useMemo, createContext, Dispatch, SetStateAction } from 'react';
 import { useMediaQuery, ThemeProvider as MuiThemeProvider } from '@mui/material';
-import { useLocalStorage } from '@uidotdev/usehooks';
 
 import createAppTheme, { ThemeOptions } from './theme';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 interface ThemeProps {
   theme: ThemeOptions;
@@ -20,10 +20,7 @@ const ThemeProvider = ({ children }: ChildrenProps) => {
 
 export const AppThemeProvider = ({ children }: ChildrenProps) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [theme, setTheme] = useLocalStorage<ThemeOptions>(
-    'theme',
-    prefersDarkMode ? 'dark' : 'light'
-  );
+  const [theme, setTheme] = useLocalStorage('theme', prefersDarkMode ? 'dark' : 'light');
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
