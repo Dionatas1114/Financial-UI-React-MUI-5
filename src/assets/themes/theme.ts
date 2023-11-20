@@ -1,9 +1,7 @@
-import { createTheme } from '@mui/material';
+import { createTheme, PaletteMode } from '@mui/material';
 import { Colors } from 'assets/colors';
 
-export type ThemeOptions = 'dark' | 'light';
-
-export default function createAppTheme(theme: ThemeOptions) {
+export default function createAppTheme(theme: PaletteMode) {
   const { global } = Colors;
   const color = global[theme];
 
