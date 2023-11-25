@@ -9,8 +9,8 @@ export default function createAppTheme(theme: PaletteMode) {
     palette: {
       mode: theme,
       background: {
-        default: global[theme].default,
-        paper: global[theme].paper,
+        default: color.default,
+        paper: color.paper,
       },
       primary: {
         main: color.primary,
