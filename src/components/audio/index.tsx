@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as MUI from '@mui/material';
 import ReactPlayer from 'react-player';
 
 import { RefProps } from 'components/button/Library';
@@ -44,13 +45,16 @@ export type { SongProps, AudioProps };
 // }
 
 const Audio = ({ audioUrl, isPlaying, volume }: AudioProps) => (
-  <ReactPlayer
-    url={audioUrl}
-    playing={isPlaying}
-    volume={volume}
-    // onLoadedMetadata={timeUpdateHandler}
-    // onTimeUpdate={timeUpdateHandler}
-  />
+  // Component hidden
+  <MUI.Box sx={{ display: 'none' }}>
+    <ReactPlayer
+      url={audioUrl}
+      playing={isPlaying}
+      volume={volume}
+      // onLoadedMetadata={timeUpdateHandler}
+      // onTimeUpdate={timeUpdateHandler}
+    />
+  </MUI.Box>
 );
 
 export default Audio;
