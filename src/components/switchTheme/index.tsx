@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import { Brightness3 as DarkModeIcon, WbSunny as LightModeIcon } from '@mui/icons-material';
 
-import { Checkbox, Ball, Label, SunIcon, MoonIcon } from './styles';
-import { Children } from 'layout/header/style';
+import { Checkbox, Children, Ball, Label, SunIcon, MoonIcon } from './styles';
 import { ThemeContext } from 'assets/themes';
 
 export default function SwitchTheme() {
