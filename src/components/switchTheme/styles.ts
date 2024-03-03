@@ -6,6 +6,10 @@ const Checkbox = styled('input')`
   position: absolute;
 `;
 
+const Children = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+}));
+
 interface BallProps {
   isChecked: boolean;
 }
@@ -59,4 +63,4 @@ const MoonIcon = styled('i')`
   }
 `;
 
-export { Checkbox, Ball, Label, SunIcon, MoonIcon };
+export { Checkbox, Children, Ball, Label, SunIcon, MoonIcon };

@@ -6,17 +6,12 @@ import Cryptos, { Crypto } from 'hooks/cryptos';
 
 // import { myStocks } from 'mocks/stocks';
 import Header from 'layout/header';
+import PlayerAppBar from 'layout/footer/PlayerAppBar';
 import CustomGrid from 'components/grid';
 
 export default function Main() {
+  const { handleClickShowStocks, cryptos } = Cryptos();
   // const { stocks, fetchStocks } = Stocks();
-  const { cryptos, fetchCryptos } = Cryptos();
-  console.log('🚀 ~ file: index.tsx:11 ~ StocksGrid ~ cryptos', cryptos);
-
-  const handleClickShowStocks = async () => {
-    // await fetchStocks(myStocks);
-    await fetchCryptos();
-  };
 
   return (
     <>
@@ -82,6 +77,8 @@ export default function Main() {
           )
         )}
       </Grid>
+      <Toolbar />
+      <PlayerAppBar />
     </>
   );
 }

@@ -1,12 +1,12 @@
 import { useContext, useMemo, createContext, Dispatch, SetStateAction } from 'react';
-import { useMediaQuery, ThemeProvider as MuiThemeProvider } from '@mui/material';
+import { useMediaQuery, ThemeProvider as MuiThemeProvider, PaletteMode } from '@mui/material';
 
-import createAppTheme, { ThemeOptions } from './theme';
+import createAppTheme from './theme';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 
 interface ThemeProps {
-  theme: ThemeOptions;
-  setTheme: Dispatch<SetStateAction<ThemeOptions>>;
+  theme: PaletteMode;
+  setTheme: Dispatch<SetStateAction<PaletteMode>>;
 }
 
 export const ThemeContext = createContext<ThemeProps>({} as ThemeProps);
