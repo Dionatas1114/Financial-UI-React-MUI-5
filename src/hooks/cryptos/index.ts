@@ -18,6 +18,12 @@ export type { Crypto };
 
 export default function useCryptos() {
   const [cryptos, setCryptos] = useState<Crypto[] | []>([]);
+  // const { cryptos, fetchCryptos } = Cryptos();
+
+  // const handleClickShowStocks = async () => {
+  //   // await fetchStocks(myStocks);
+  //   await fetchCryptos();
+  // };
 
   const fetchCryptos = async () => {
     try {
@@ -32,17 +38,15 @@ export default function useCryptos() {
       });
       console.log('🚀 ~ file: index.ts:23 ~ fetchCryptos ~ data', data.coins);
 
-      const cryptos: Crypto[] = data?.coins?.map((crypto: Crypto, index: number) => {
-        return {
-          id: index + 1,
-          currency: crypto.currency,
-          coinName: split(crypto.coinName),
-          regularMarketPrice: round(crypto.regularMarketPrice),
-          regularMarketChangePercent: round(crypto.regularMarketChangePercent),
-          regularMarketChange: round(crypto.regularMarketChange),
-          coinImageUrl: crypto.coinImageUrl,
-        };
-      });
+      const cryptos: Crypto[] = data?.coins?.map((crypto: Crypto, index: number) => ({
+        id: index + 1,
+        currency: crypto.currency,
+        coinName: split(crypto.coinName),
+        regularMarketPrice: round(crypto.regularMarketPrice),
+        regularMarketChangePercent: round(crypto.regularMarketChangePercent),
+        regularMarketChange: round(crypto.regularMarketChange),
+        coinImageUrl: crypto.coinImageUrl,
+      }));
 
       setCryptos(cryptos);
     } catch (err) {
@@ -50,5 +54,12 @@ export default function useCryptos() {
     }
   };
 
-  return { cryptos, fetchCryptos };
+  const handleClickShowStocks = async () => {
+    // await fetchStocks(myStocks);
+    await fetchCryptos();
+  };
+
+  console.log('🚀 ~ file: index.tsx:11 ~ StocksGrid ~ cryptos', cryptos);
+
+  return { handleClickShowStocks, cryptos };
 }

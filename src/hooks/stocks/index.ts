@@ -7,7 +7,7 @@ import { defaultStocks } from 'mocks/stocks';
 import { Stock } from './type';
 
 export default function useStocks() {
-  const [stocks, setStocks] = useState<Stock[]| []>([]);
+  const [stocks, setStocks] = useState<Stock[] | []>([]);
 
   const fetchStocks = async (myStocks: string[] = defaultStocks) => {
     try {
@@ -23,18 +23,16 @@ export default function useStocks() {
         },
       });
 
-      const stocks: Stock[] = data?.results?.map((stock: Stock, index: number) => {
-        return {
-          id: index + 1,
-          currency: stock.currency,
-          symbol: stock.symbol,
-          shortName: split(stock.shortName),
-          logourl: stock.logourl,
-          regularMarketPrice: stock.regularMarketPrice,
-          regularMarketChangePercent: round(stock.regularMarketChangePercent),
-          regularMarketChange: round(stock.regularMarketChange),
-        };
-      });
+      const stocks: Stock[] = data?.results?.map((stock: Stock, index: number) => ({
+        id: index + 1,
+        currency: stock.currency,
+        symbol: stock.symbol,
+        shortName: split(stock.shortName),
+        logourl: stock.logourl,
+        regularMarketPrice: stock.regularMarketPrice,
+        regularMarketChangePercent: round(stock.regularMarketChangePercent),
+        regularMarketChange: round(stock.regularMarketChange),
+      }));
 
       console.log('🚀 ~ file: index.ts:55 ~ fetchStocks ~ stocks', stocks);
       setStocks(stocks);
