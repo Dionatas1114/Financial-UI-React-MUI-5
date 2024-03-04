@@ -30,6 +30,7 @@ export default function PlayerAppBar() {
   // const [songs, setSongs] = React.useState(songsList());
   // const [currentSong, setCurrentSong] = React.useState(songs[0]);
   const [songInfo, setSongInfo] = React.useState(songInitialState);
+  const [volume, setVolume] = React.useState(songInitialState.volume);
   const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -61,10 +62,10 @@ export default function PlayerAppBar() {
     // }
   };
 
-  const handleSetVolume = (_: Event, volume: number | number[]) => {
-    if (audioRef.current) {
-      audioRef.current.volume = (volume as number) / 100;
-      setSongInfo({ ...songInfo, volume: volume as number });
+  const handleSetVolume = (_: Event, _volume: number | number[]) => {
+    if (isActiveVolume) {
+      setVolume(_volume as number);
+      // setSongInfo({ ...songInfo, volume: volume as number });
     } else {
       console.error('Error with volume button');
     }
@@ -102,12 +103,12 @@ export default function PlayerAppBar() {
   const audioProps = {
     audioUrl,
     isPlaying,
-    volume: isActiveVolume ? songInitialState.volume / 100 : songMuted,
+    volume: isActiveVolume ? volume / 100 : songMuted,
   };
   const volumeProps = {
     handleActiveVolume,
     isActiveVolume,
-    volume: songInfo.volume,
+    volume,
     handleSetVolume,
   };
   const menuBarProps = {

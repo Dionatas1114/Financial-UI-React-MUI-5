@@ -25,11 +25,11 @@ function Volume({ handleActiveVolume, isActiveVolume, volume, handleSetVolume }:
         </MUI.IconButton>
         <CustomSlider
           aria-label="Volume Slider"
-          // disabled={!isActiveVolume}
-          // value={volume}
-          // max={100}
-          // min={0}
-          // onChange={handleSetVolume}
+          disabled={!isActiveVolume}
+          value={volume}
+          max={100}
+          min={0}
+          onChange={handleSetVolume}
           valueLabelDisplay="auto"
           sx={{ display: 'flex', alignItems: 'center' }}
           // orientation="vertical"
