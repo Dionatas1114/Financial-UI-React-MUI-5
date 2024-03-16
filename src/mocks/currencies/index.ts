@@ -1,6 +1,6 @@
 const currencies: StringElements = {
   BRL: 'R$',
-  USD: 'US$',
+  USD: 'USD',
   EUR: '€',
 };
 
