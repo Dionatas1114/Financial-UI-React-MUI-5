@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as MUI from '@mui/material';
 import ReactPlayer from 'react-player';
-
-import { RefProps } from 'components/button/Library';
+import { OnProgressProps } from 'react-player/base';
+// import { RefProps } from 'components/button/Library';
 
 interface SongProps {
   id: string;
@@ -25,9 +25,9 @@ interface AudioProps {
   audioUrl: string;
   isPlaying: boolean;
   volume?: number;
+  timeUpdateHandler?: (state: OnProgressProps) => void;
   // audioRef: React.RefObject<HTMLAudioElement>;
   // songEndHandler?: (event: React.SyntheticEvent<HTMLAudioElement>) => void;
-  // timeUpdateHandler?: (event: React.SyntheticEvent<HTMLAudioElement>) => void;
 }
 
 export type { SongProps, AudioProps };
@@ -44,7 +44,7 @@ export type { SongProps, AudioProps };
 //   );
 // }
 
-const Audio = ({ audioUrl, isPlaying, volume }: AudioProps) => (
+const Audio = ({ audioUrl, isPlaying, volume, timeUpdateHandler }: AudioProps) => (
   // Component hidden
   <MUI.Box sx={{ display: 'none' }}>
     <ReactPlayer
@@ -53,6 +53,9 @@ const Audio = ({ audioUrl, isPlaying, volume }: AudioProps) => (
       volume={volume}
       // onLoadedMetadata={timeUpdateHandler}
       // onTimeUpdate={timeUpdateHandler}
+      onProgress={timeUpdateHandler}
+      // onSeek={() => 50}
+      stopOnUnmount
     />
   </MUI.Box>
 );
