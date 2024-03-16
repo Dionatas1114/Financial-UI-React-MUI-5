@@ -19,7 +19,7 @@ export default function UseMedias(videoUrl: string) {
             videoUrl,
           });
 
-          const titleFromHeader = response?.headers['Cache-Control']?.toString() || '';
+          const titleFromHeader = response?.headers['cache-control']?.toString() || '';
           const url = URL.createObjectURL(response?.data);
 
           setSongTitle(titleFromHeader);
