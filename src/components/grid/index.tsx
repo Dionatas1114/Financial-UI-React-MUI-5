@@ -1,23 +1,24 @@
-import { Grid, Paper, Typography, Chip, Avatar } from '@mui/material';
-import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
-import { currencyFormat } from 'utils/functions';
+import { Grid, Paper, Typography, Avatar } from '@mui/material'; //Chip
+// import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
+// import { currencyFormat } from 'utils/functions';
 
-import currencies from 'mocks/currencies';
+// import currencies from 'mocks/currencies';
 
 interface CustomGridPros {
   id: number;
-  logourl: string;
-  shortName: string;
-  symbol: string;
   currency: string;
-  changePercent: number;
-  change: number;
-  price: number;
+  price: string;
+  shortName: string;
+  logourl: string;
+  // symbol: string;
+  // changePercent: number;
+  // change: number;
 }
 
 export default function CustomGrid(props: CustomGridPros) {
-  const { id, logourl, shortName, symbol, currency, changePercent, change, price } = props;
-  const chipLabel = `${currencies[currency]} ${change} (% ${changePercent})`;
+  // currency, symbol, changePercent, change
+  const { id, shortName, price, logourl } = props;
+  // const chipLabel = `${currencies[currency]} ${change} (% ${changePercent})`;
 
   return (
     <>
@@ -40,22 +41,23 @@ export default function CustomGrid(props: CustomGridPros) {
                   <Typography variant="subtitle1" gutterBottom>
                     {shortName}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  {/* <Typography variant="body2" color="text.secondary">
                     {symbol}
-                  </Typography>
+                  </Typography> */}
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   {changePercent >= 0 ? (
                     <Chip color="success" icon={<ArrowUpward />} label={chipLabel} />
                   ) : (
                     <Chip color="error" icon={<ArrowDownward />} label={chipLabel} />
                   )}
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid item>
                 <Typography
                   variant="subtitle1"
-                  children={`${currencies[currency]} ${currencyFormat(price)}`}
+                  children={price}
+                  // children={`${currencies[currency]} ${currencyFormat(price)}`}
                 />
               </Grid>
             </Grid>

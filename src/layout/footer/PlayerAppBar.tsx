@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as MUI from '@mui/material';
+import { OnProgressProps } from 'react-player/base';
 
 import Volume from './Volume';
 import MenuBar from './MenuBar';
@@ -26,11 +27,11 @@ export default function PlayerAppBar() {
 
   const { audioUrl, isPlaying, songTitle, playSongHandler } = UseMedias(url);
 
-  const audioRef = React.createRef<HTMLAudioElement>();
   // const [songs, setSongs] = React.useState(songsList());
   // const [currentSong, setCurrentSong] = React.useState(songs[0]);
   const [songInfo, setSongInfo] = React.useState(songInitialState);
   const [volume, setVolume] = React.useState(songInitialState.volume);
+  // const [position, setPosition] = React.useState(songInitialState.currentTime);
   const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -72,25 +73,25 @@ export default function PlayerAppBar() {
   };
 
   const handleChangeSliderPosition = (_: Event, position: number | number[]) => {
-    if (audioRef.current) {
+    // if (audioRef.current) {
       console.log('🚀 ~ handleChangeSliderPosition ~ position:', position as number);
-      audioRef.current.currentTime = position as number;
-      setSongInfo({ ...songInfo, currentTime: position as number });
-    } else {
-      console.error('Error with song position button');
-    }
+    //   audioRef.current.currentTime = position as number;
+    setSongInfo({ ...songInfo, currentTime: position as number });
+    // } else {
+    //   console.error('Error with song position button');
+    // }
   };
 
   const nextSongHandler = () => console.log('next music');
 
-  const timeUpdateHandler = ({ currentTarget: e }: React.SyntheticEvent<HTMLAudioElement>) => {
-    const animationPercent = Math.round((Math.round(e.currentTime) / Math.round(e.duration)) * 100);
+  const timeUpdateHandler = (state: OnProgressProps) => {
+    const { playedSeconds: currentTime, loadedSeconds: duration } = state;
 
     setSongInfo({
-      currentTime: e.currentTime,
-      duration: e.duration,
+      currentTime: Math.round(currentTime),
+      duration: Math.round(duration),
       volume: songInfo.volume,
-      animationPercent,
+      animationPercent: (Math.round(currentTime) / Math.round(duration)) * 100,
     });
   };
 
@@ -104,6 +105,7 @@ export default function PlayerAppBar() {
     audioUrl,
     isPlaying,
     volume: isActiveVolume ? volume / 100 : songMuted,
+    timeUpdateHandler,
   };
   const volumeProps = {
     handleActiveVolume,

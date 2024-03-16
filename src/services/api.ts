@@ -1,18 +1,26 @@
-import axios from 'axios';
+import axios, { ResponseType } from 'axios';
 
-const brapiBaseURL = process.env.REACT_APP_BRAPI_API_URL || 'https://brapi.dev/';
-const mediaURL = process.env.REACT_APP_MEDIA_API_URL || 'http://localhost:8080';
+const {
+  REACT_APP_MEDIA_API_URL: mediaApibaseURL,
+  REACT_APP_BRAPI_API_URL: brapiApibaseURL,
+  REACT_APP_CRYPTO_COMPARE_API_URL: cryptoCompareApibaseURL,
+} = process.env;
 
-const clientInstance = (baseURL: string, auth?: string) =>
+const mediaBaseURL = mediaApibaseURL || 'http://localhost:8080';
+const brapiBaseURL = brapiApibaseURL || 'https://brapi.dev/';
+const cryptoCompareBaseURL = cryptoCompareApibaseURL || 'https://min-api.cryptocompare.com/';
+
+const clientInstance = (baseURL: string, responseType?: ResponseType, auth?: string) =>
   axios.create({
     baseURL,
     params: {
       apikey: auth,
     },
-    responseType: 'blob',
+    responseType,
   });
 
 const brapiApi = clientInstance(brapiBaseURL);
-const mediaApi = clientInstance(mediaURL);
+const mediaApi = clientInstance(mediaBaseURL, 'blob');
+const cryptoCompareApi = clientInstance(cryptoCompareBaseURL);
 
-export { brapiApi, brapiBaseURL, mediaApi, mediaURL };
+export { brapiApi, brapiBaseURL, mediaApi, mediaBaseURL, cryptoCompareApi, cryptoCompareBaseURL };
