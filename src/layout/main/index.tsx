@@ -58,20 +58,21 @@ export default function Main() {
             currency,
             coinName: shortName,
             regularMarketPrice: price,
-            regularMarketChangePercent: changePercent,
-            regularMarketChange: change,
+            // regularMarketChangePercent: changePercent,
+            // regularMarketChange: change,
             coinImageUrl: logourl,
           }: Crypto) => (
             <CustomGrid
+              key={id}
               {...{
                 id,
                 currency,
                 symbol: shortName,
                 shortName,
-                logourl,
                 price,
-                changePercent,
-                change,
+                logourl,
+                // changePercent,
+                // change,
               }}
             />
           )

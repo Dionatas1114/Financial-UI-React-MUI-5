@@ -25,7 +25,7 @@ const SliderProgress = ({
   <MUI.Box
     sx={{
       width: '100%',
-      marginX: '2em',
+      marginRight: '1em',
       display: 'flex',
     }}
   >
@@ -33,7 +33,7 @@ const SliderProgress = ({
       aria-label="Media Title"
       noWrap
       letterSpacing={-0.25}
-      sx={(theme) => ({ margin: theme.spacing(1, 3, 0, 0) })}
+      sx={(theme) => ({ margin: theme.spacing(1, 3, 0, 1) })}
       children={songTitle}
     />
     <TinyTextLeft>{getTime(position)}</TinyTextLeft>
