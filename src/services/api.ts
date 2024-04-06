@@ -19,8 +19,17 @@ const clientInstance = (baseURL: string, responseType?: ResponseType, auth?: str
     responseType,
   });
 
-const brapiApi = clientInstance(brapiBaseURL);
-const mediaApi = clientInstance(mediaBaseURL, 'blob');
 const cryptoCompareApi = clientInstance(cryptoCompareBaseURL);
+const brapiApi = clientInstance(brapiBaseURL);
+const mediaApi = clientInstance(mediaBaseURL);
+const mediaBlobApi = clientInstance(mediaBaseURL, 'blob');
 
-export { brapiApi, brapiBaseURL, mediaApi, mediaBaseURL, cryptoCompareApi, cryptoCompareBaseURL };
+export {
+  brapiApi,
+  brapiBaseURL,
+  mediaBlobApi,
+  mediaApi,
+  mediaBaseURL,
+  cryptoCompareApi,
+  cryptoCompareBaseURL,
+};
