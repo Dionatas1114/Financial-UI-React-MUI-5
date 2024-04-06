@@ -12,7 +12,7 @@ import PlayerSettings from './PlayerSettings';
 
 import Audio from 'components/audio';
 // import { songsList } from 'components/audio/data';
-import UseMedias from 'hooks/media';
+import useAudioPlayer from 'hooks/media/useAudioPlayer';
 
 export default function PlayerAppBar() {
   const url = 'https://www.youtube.com/watch?v=luOEoasGUK0';
@@ -25,7 +25,7 @@ export default function PlayerAppBar() {
     volume: 50,
   };
 
-  const { audioUrl, isPlaying, songTitle, playSongHandler } = UseMedias(url);
+  const { audioUrl, isPlaying, songTitle, handlePlaySong } = useAudioPlayer(url);
 
   // const [songs, setSongs] = React.useState(songsList());
   // const [currentSong, setCurrentSong] = React.useState(songs[0]);
@@ -74,7 +74,7 @@ export default function PlayerAppBar() {
 
   const handleChangeSliderPosition = (_: Event, position: number | number[]) => {
     // if (audioRef.current) {
-      console.log('🚀 ~ handleChangeSliderPosition ~ position:', position as number);
+    console.log('🚀 ~ handleChangeSliderPosition ~ position:', position as number);
     //   audioRef.current.currentTime = position as number;
     setSongInfo({ ...songInfo, currentTime: position as number });
     // } else {
@@ -98,7 +98,7 @@ export default function PlayerAppBar() {
   const menuId = 'player-menu';
   const mobileMenuId = 'player-menu-mobile';
 
-  const playerControlProps = { playSongHandler, nextSongHandler, isPlaying };
+  const playerControlProps = { handlePlaySong, nextSongHandler, isPlaying };
   const playerToolsProps = { menuId, handleProfileMenuOpen };
   const playerSettingsProps = { mobileMenuId, handleMobileMenuOpen };
   const audioProps = {

@@ -3,15 +3,15 @@ import * as IconsMUI from '@mui/icons-material';
 
 interface PlayerControlProps {
   isPlaying: boolean;
-  playSongHandler: () => void;
+  handlePlaySong: () => void;
   nextSongHandler: () => void;
 }
 
 export type { PlayerControlProps };
 
-const PlayerControl = ({ isPlaying, playSongHandler, nextSongHandler }: PlayerControlProps) => (
+const PlayerControl = ({ isPlaying, handlePlaySong, nextSongHandler }: PlayerControlProps) => (
   <MUI.Box sx={{ display: 'flex', alignItems: 'center' }}>
-    <MUI.IconButton aria-label={isPlaying ? 'play' : 'pause'} onClick={playSongHandler}>
+    <MUI.IconButton aria-label={isPlaying ? 'play' : 'pause'} onClick={handlePlaySong}>
       {isPlaying ? (
         <IconsMUI.PauseRounded sx={{ fontSize: '3rem' }} />
       ) : (
