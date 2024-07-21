@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { mediaApi } from 'services/api';
+import { mediaApi } from '../../services/api';
 
 interface Song {
   id: number;

@@ -10,9 +10,9 @@ import PlayerControl from './PlayerControl';
 import SliderProgress from './SliderProgress';
 import PlayerSettings from './PlayerSettings';
 
-import Audio from 'components/audio';
+import Audio from '../../components/audio';
 // import { songsList } from 'components/audio/data';
-import useAudioPlayer from 'hooks/media/useAudioPlayer';
+import useAudioPlayer from '../../hooks/media/useAudioPlayer';
 
 export default function PlayerAppBar() {
   const url = 'https://www.youtube.com/watch?v=luOEoasGUK0';

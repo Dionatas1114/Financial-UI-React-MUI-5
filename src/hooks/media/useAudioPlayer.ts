@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { mediaBlobApi } from 'services/api';
+import { mediaBlobApi } from '../../services/api';
 
 export default function useAudioPlayer(videoUrl: string) {
   const [isPlaying, setIsPlaying] = React.useState(false);
