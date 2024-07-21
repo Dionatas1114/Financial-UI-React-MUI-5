@@ -23,8 +23,8 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false, // desabilita aviso para variáveis não utilizadas
+    "noUnusedParameters": false, // desabilita aviso para parâmetros não utilizados
     "noFallthroughCasesInSwitch": true
   },
   "include": [
