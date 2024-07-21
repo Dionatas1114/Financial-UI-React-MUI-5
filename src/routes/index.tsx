@@ -1,7 +1,5 @@
-import Main from 'layout/main';
+import Main from '../layout/main';
 
-const Routes = () => {
-  return <Main />;
-};
+const Routes = () => <Main />;
 
 export default Routes;

@@ -1,7 +1,7 @@
 import { Box, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 import { Menu as MenuIcon, Search as SearchIcon } from '@mui/icons-material';
 import { SearchIconWrapper, StyledInputBase, Search, Children } from './style';
-import SwitchTheme from 'components/switchTheme';
+import SwitchTheme from '../../components/switchTheme';
 
 const Header = ({ children }: ChildrenProps) => (
   <Box sx={{ flexGrow: 1 }}>

@@ -2,12 +2,12 @@ import { Button, Grid, Toolbar } from '@mui/material';
 
 // import Stocks from 'hooks/stocks';
 // import { Stock } from 'hooks/stocks/type';
-import Cryptos, { Crypto } from 'hooks/cryptos';
+import Cryptos, { Crypto } from '../../hooks/cryptos';
 
 // import { myStocks } from 'mocks/stocks';
-import Header from 'layout/header';
-import PlayerAppBar from 'layout/footer/PlayerAppBar';
-import CustomGrid from 'components/grid';
+import Header from '../../layout/header';
+import PlayerAppBar from '../../layout/footer/PlayerAppBar';
+import CustomGrid from '../../components/grid';
 
 export default function Main() {
   const { handleClickShowStocks, cryptos } = Cryptos();
