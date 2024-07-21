@@ -1,33 +1,37 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "outDir": "./dist",
-      "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-      ],
-      "baseUrl": "./src",
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "useUnknownInCatchVariables": false,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": false,
-      "noFallthroughCasesInSwitch": true,
-      "strictNullChecks": true,
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true,
-      "jsx": "react-jsx"
-    },
-    "include": [
-      "src",
-      "src/tests/App.test.tsx",
-      "src/tests/setupTests.ts",
-      "src/types/index.d.ts"
-    ]
-  }
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2020",
+    "outDir": "./dist",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "baseUrl": "./src",
+    "module": "ESNext",
+    "allowJs": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "src",
+    // "src/tests/App.test.tsx",
+    // "src/tests/setupTests.ts",
+    "src/types/index.d.ts",
+    "vite.config.ts"
+  ]
+}
