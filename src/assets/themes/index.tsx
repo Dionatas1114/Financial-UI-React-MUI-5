@@ -2,7 +2,7 @@ import { useContext, useMemo, createContext, Dispatch, SetStateAction } from 're
 import { useMediaQuery, ThemeProvider as MuiThemeProvider, PaletteMode } from '@mui/material';
 
 import createAppTheme from './theme';
-import { useLocalStorage } from 'hooks/useLocalStorage';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 interface ThemeProps {
   theme: PaletteMode;

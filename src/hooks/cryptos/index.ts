@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { AxiosResponse } from 'axios';
 
-import myCryptos from 'mocks/cryptos';
-import { brapiApi, cryptoCompareApi, cryptoCompareBaseURL } from 'services/api';
-import { round, split } from 'utils/functions';
-import currencies from 'mocks/currencies';
+import myCryptos from '../../mocks/cryptos';
+import { brapiApi, cryptoCompareApi, cryptoCompareBaseURL } from '../../services/api';
+// import { round, split } from 'utils/functions';
+import currencies from '../../mocks/currencies';
 
 interface Crypto {
   id: number;

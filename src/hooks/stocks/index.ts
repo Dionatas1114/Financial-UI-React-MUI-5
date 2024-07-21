@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { brapiApi } from 'services/api';
-import { round, split } from 'utils/functions';
+import { brapiApi } from '../../services/api';
+import { round, split } from '../../utils/functions';
 
-import { defaultStocks } from 'mocks/stocks';
+import { defaultStocks } from '../../mocks/stocks';
 import { Stock } from './type';
 
 export default function useStocks() {

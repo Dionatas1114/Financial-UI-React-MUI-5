@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TextField, Autocomplete, CircularProgress, styled, lighten, darken } from '@mui/material';
-import usePlaylistListing from 'hooks/media/usePlaylistListing';
+import usePlaylistListing from '../../../../hooks/media/usePlaylistListing';
 
 // colocar num arquivo styles.ts
 const GroupHeader = styled('div')(({ theme }) => ({
