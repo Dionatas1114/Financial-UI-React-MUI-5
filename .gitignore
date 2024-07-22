@@ -72,7 +72,7 @@ tmpnodejsnpm-cache/
 .yarn-integrity
 
 # dotenv environment variables file
-.env.test
+.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
