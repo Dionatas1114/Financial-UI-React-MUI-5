@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as MUI from '@mui/material';
+import React from 'react';
+import { Box, AppBar, Toolbar } from '@mui/material';
 import { OnProgressProps } from 'react-player/base';
 
 import Volume from './Volume';
@@ -132,20 +132,20 @@ export default function PlayerAppBar() {
   };
 
   return (
-    <MUI.Box sx={{ flexGrow: 1 }}>
-      <MUI.AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
-        <MUI.Toolbar>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+        <Toolbar>
           <PlayerLogo />
           <PlayerControl {...playerControlProps} />
           <SliderProgress {...sliderPositionProps} />
           <Volume {...volumeProps} />
-          <MUI.Box sx={{ flexGrow: 1 }} /> {/* DIVIDER */}
+          <Box sx={{ flexGrow: 1 }} /> {/* DIVIDER */}
           <PlayerTools {...playerToolsProps} />
           <PlayerSettings {...playerSettingsProps} />
           <Audio {...audioProps} />
-        </MUI.Toolbar>
-      </MUI.AppBar>
+        </Toolbar>
+      </AppBar>
       <MenuBar {...menuBarProps} />
-    </MUI.Box>
+    </Box>
   );
 }

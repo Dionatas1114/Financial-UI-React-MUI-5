@@ -1,4 +1,4 @@
-import * as MUI from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { CustomSlider, TinyTextLeft, TinyTextRigth } from './styles';
 
 interface SliderProgressProps {
@@ -22,14 +22,14 @@ const SliderProgress = ({
   duration,
   handleChangeSliderPosition,
 }: SliderProgressProps) => (
-  <MUI.Box
+  <Box
     sx={{
       width: '100%',
       marginRight: '1em',
       display: 'flex',
     }}
   >
-    <MUI.Typography
+    <Typography
       aria-label="Media Title"
       noWrap
       letterSpacing={-0.25}
@@ -46,7 +46,7 @@ const SliderProgress = ({
       onChange={handleChangeSliderPosition}
     />
     <TinyTextRigth>{duration ? '-' + getTime(duration - position) : '0:00'}</TinyTextRigth>
-  </MUI.Box>
+  </Box>
 );
 
 export default SliderProgress;
