@@ -1,5 +1,5 @@
-import * as MUI from '@mui/material';
-import * as IconsMUI from '@mui/icons-material';
+import { Box, Stack, IconButton } from '@mui/material';
+import { VolumeOff, VolumeUp } from '@mui/icons-material';
 import { CustomSlider } from './styles';
 
 interface VolumeProps {
@@ -13,16 +13,16 @@ export type { VolumeProps };
 
 function Volume({ handleActiveVolume, isActiveVolume, volume, handleSetVolume }: VolumeProps) {
   return (
-    <MUI.Box sx={{ width: 200, mr: 1, display: { sm: 'block' } }}>
-      <MUI.Stack spacing={2} direction="row" alignItems="center">
-        <MUI.IconButton
+    <Box sx={{ width: 200, mr: 1, display: { sm: 'block' } }}>
+      <Stack spacing={2} direction="row" alignItems="center">
+        <IconButton
           aria-label="Volume Icon"
           size="large"
           color="inherit"
           onClick={handleActiveVolume}
         >
-          {!isActiveVolume ? <IconsMUI.VolumeOff /> : <IconsMUI.VolumeUp />}
-        </MUI.IconButton>
+          {!isActiveVolume ? <VolumeOff /> : <VolumeUp />}
+        </IconButton>
         <CustomSlider
           aria-label="Volume Slider"
           disabled={!isActiveVolume}
@@ -34,8 +34,8 @@ function Volume({ handleActiveVolume, isActiveVolume, volume, handleSetVolume }:
           sx={{ display: 'flex', alignItems: 'center' }}
           // orientation="vertical"
         />
-      </MUI.Stack>
-    </MUI.Box>
+      </Stack>
+    </Box>
   );
 }
 

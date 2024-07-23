@@ -1,5 +1,5 @@
 // import * as React from 'react';
-import * as MUI from '@mui/material';
+import { Box } from '@mui/material';
 import ReactPlayer from 'react-player';
 import { OnProgressProps } from 'react-player/base';
 // import { RefProps } from 'components/button/Library';
@@ -46,7 +46,7 @@ export type { SongProps, AudioProps };
 
 const Audio = ({ audioUrl, isPlaying, volume, timeUpdateHandler }: AudioProps) => (
   // Component hidden
-  <MUI.Box sx={{ display: 'none' }}>
+  <Box sx={{ display: 'none' }}>
     <ReactPlayer
       url={audioUrl}
       playing={isPlaying}
@@ -57,7 +57,7 @@ const Audio = ({ audioUrl, isPlaying, volume, timeUpdateHandler }: AudioProps) =
       // onSeek={() => 50}
       stopOnUnmount
     />
-  </MUI.Box>
+  </Box>
 );
 
 export default Audio;
