@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as MUI from '@mui/material';
-import * as IconsMUI from '@mui/icons-material';
+import React from 'react';
+import { Menu, MenuItem, IconButton, Badge } from '@mui/material';
+import { Settings, PlaylistPlay } from '@mui/icons-material';
 
 interface MenuBarProps {
   menuId: string;
@@ -26,28 +26,28 @@ export default function MenuBar({
   handleProfileMenuOpen,
 }: MenuBarProps) {
   const renderMenu = (
-    <MUI.Menu
-    id={menuId}
-    keepMounted
-    onClose={handleMenuClose}
-    open={isMenuOpen}
-    anchorEl={anchorEl}
-    anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'right',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'right',
-    }}
+    <Menu
+      id={menuId}
+      keepMounted
+      onClose={handleMenuClose}
+      open={isMenuOpen}
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
     >
-      <MUI.MenuItem onClick={handleMenuClose}>Profile</MUI.MenuItem>
-      <MUI.MenuItem onClick={handleMenuClose}>My account</MUI.MenuItem>
-    </MUI.Menu>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
   );
 
   const renderMobileMenu = (
-    <MUI.Menu
+    <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -62,26 +62,26 @@ export default function MenuBar({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MUI.MenuItem>
-        <MUI.IconButton size="large" aria-label="playlists" color="inherit">
-          <MUI.Badge badgeContent={17} color="error">
-            <IconsMUI.PlaylistPlay />
-          </MUI.Badge>
-        </MUI.IconButton>
+      <MenuItem>
+        <IconButton size="large" aria-label="playlists" color="inherit">
+          <Badge badgeContent={17} color="error">
+            <PlaylistPlay />
+          </Badge>
+        </IconButton>
         <p>Playlist</p>
-      </MUI.MenuItem>
-      <MUI.MenuItem onClick={handleProfileMenuOpen}>
-        <MUI.IconButton
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
           size="large"
           aria-label="account of current user"
           aria-controls="player-menu"
           aria-haspopup="true"
           color="inherit"
-          children={<IconsMUI.Settings />}
+          children={<Settings />}
         />
         <p>Profile</p>
-      </MUI.MenuItem>
-    </MUI.Menu>
+      </MenuItem>
+    </Menu>
   );
 
   return (

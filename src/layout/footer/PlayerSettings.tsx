@@ -1,5 +1,5 @@
-import * as MUI from '@mui/material';
-import * as IconsMUI from '@mui/icons-material';
+import { Box, IconButton } from '@mui/material';
+import { Settings } from '@mui/icons-material';
 
 interface PlayerSettingsProps {
   mobileMenuId: string;
@@ -10,17 +10,17 @@ export type { PlayerSettingsProps };
 
 function PlayerSettings({ mobileMenuId, handleMobileMenuOpen }: PlayerSettingsProps) {
   return (
-    <MUI.Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-      <MUI.IconButton
+    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+      <IconButton
         size="large"
         aria-label="show more"
         aria-controls={mobileMenuId}
         aria-haspopup="true"
         onClick={handleMobileMenuOpen}
         color="inherit"
-        children={<IconsMUI.Settings />}
+        children={<Settings />}
       />
-    </MUI.Box>
+    </Box>
   );
 }
 

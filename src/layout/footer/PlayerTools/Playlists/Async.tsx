@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { TextField, Autocomplete, CircularProgress, styled, lighten, darken } from '@mui/material';
 import usePlaylistListing from '../../../../hooks/media/usePlaylistListing';
 

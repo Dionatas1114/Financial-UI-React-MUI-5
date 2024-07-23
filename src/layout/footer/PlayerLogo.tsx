@@ -1,9 +1,9 @@
-import * as MUI from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function PlayerLogo() {
   return (
-    <MUI.Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-      <MUI.Typography
+    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+      <Typography
         aria-label="player logo"
         variant="h6"
         noWrap
@@ -11,6 +11,6 @@ export default function PlayerLogo() {
         sx={{ marginX: '1em' }}
         children={'PLAYER'}
       />
-    </MUI.Box>
+    </Box>
   );
 }

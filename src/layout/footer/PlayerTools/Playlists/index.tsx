@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as MUI from '@mui/material';
-import * as IconsMUI from '@mui/icons-material';
+import React from 'react';
+import { Badge, IconButton, Menu } from '@mui/material';
+import { PlaylistPlay } from '@mui/icons-material';
 import usePlaylistListing from '../../../../hooks/media/usePlaylistListing';
 import Asynchronous from './Async';
 
@@ -18,15 +18,15 @@ export default function Playlists() {
 
   return (
     <>
-      <MUI.IconButton
+      <IconButton
         aria-label="playlists"
         color="inherit"
         size="large"
         disabled={playlistDisabled}
         onClick={handleOpenUserMenu}
-        children={<MUI.Badge badgeContent={playlistCount} children={<IconsMUI.PlaylistPlay />} />}
+        children={<Badge badgeContent={playlistCount} children={<PlaylistPlay />} />}
       />
-      <MUI.Menu
+      <Menu
         id="menu-appbar"
         sx={{ position: 'absolute', top: '-3em' }}
         anchorEl={anchorElUser}
@@ -43,7 +43,7 @@ export default function Playlists() {
         }}
       >
         <Asynchronous />
-      </MUI.Menu>
+      </Menu>
     </>
   );
 }
