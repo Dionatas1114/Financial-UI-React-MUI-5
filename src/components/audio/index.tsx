@@ -1,4 +1,4 @@
-// import * as React from 'react';
+import * as React from 'react';
 import { Box } from '@mui/material';
 import ReactPlayer from 'react-player';
 import { OnProgressProps } from 'react-player/base';
@@ -14,15 +14,9 @@ interface SongProps {
   active: boolean;
 }
 
-// interface AudioProps extends RefProps {
-//   audioRef: React.RefObject<HTMLAudioElement>;
-//   audio: string;
-//   songEndHandler?: (event: React.SyntheticEvent<HTMLAudioElement>) => void;
-//   timeUpdateHandler?: (event: React.SyntheticEvent<HTMLAudioElement>) => void;
-// }
-
 interface AudioProps {
   audioUrl: string;
+  playerRef: any;
   isPlaying: boolean;
   volume?: number;
   timeUpdateHandler?: (state: OnProgressProps) => void;
@@ -32,32 +26,21 @@ interface AudioProps {
 
 export type { SongProps, AudioProps };
 
-// export default function Audio({ audioRef, audio, timeUpdateHandler, songEndHandler }: AudioProps) {
-//   return (
-//     <audio
-//       ref={audioRef}
-//       src={audio}
-//       onLoadedMetadata={timeUpdateHandler}
-//       onTimeUpdate={timeUpdateHandler}
-//       onEnded={songEndHandler}
-//     />
-//   );
-// }
+const Audio = ({ audioUrl, playerRef, isPlaying, volume, timeUpdateHandler }: AudioProps) => {
+  // const playerRef = React.useRef<ReactPlayer>(null);
 
-const Audio = ({ audioUrl, isPlaying, volume, timeUpdateHandler }: AudioProps) => (
-  // Component hidden
-  <Box sx={{ display: 'none' }}>
-    <ReactPlayer
-      url={audioUrl}
-      playing={isPlaying}
-      volume={volume}
-      // onLoadedMetadata={timeUpdateHandler}
-      // onTimeUpdate={timeUpdateHandler}
-      onProgress={timeUpdateHandler}
-      // onSeek={() => 50}
-      stopOnUnmount
-    />
-  </Box>
-);
+  return (
+    <Box sx={{ display: 'none' }}>
+      <ReactPlayer
+        url={audioUrl}
+        ref={playerRef}
+        playing={isPlaying}
+        volume={volume}
+        onProgress={timeUpdateHandler}
+        stopOnUnmount
+      />
+    </Box>
+  );
+};
 
 export default Audio;

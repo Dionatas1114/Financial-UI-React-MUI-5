@@ -13,6 +13,7 @@ import PlayerSettings from './PlayerSettings';
 import Audio from '../../components/audio';
 // import { songsList } from 'components/audio/data';
 import useAudioPlayer from '../../hooks/media/useAudioPlayer';
+import ReactPlayer from 'react-player';
 
 export default function PlayerAppBar() {
   const url = 'https://www.youtube.com/watch?v=luOEoasGUK0';
@@ -26,12 +27,13 @@ export default function PlayerAppBar() {
   };
 
   const { audioUrl, isPlaying, songTitle, handlePlaySong } = useAudioPlayer(url);
+  const playerRef = React.useRef<ReactPlayer>(null);
 
   // const [songs, setSongs] = React.useState(songsList());
   // const [currentSong, setCurrentSong] = React.useState(songs[0]);
   const [songInfo, setSongInfo] = React.useState(songInitialState);
   const [volume, setVolume] = React.useState(songInitialState.volume);
-  // const [position, setPosition] = React.useState(songInitialState.currentTime);
+  const [position, setPosition] = React.useState(0);
   const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -54,10 +56,10 @@ export default function PlayerAppBar() {
   };
 
   const handleActiveVolume = () => {
+    setIsActiveVolume(!isActiveVolume);
     // if (audioRef.current) {
     // audioRef.current.volume = isActiveVolume ? songMuted : songInitialState.volume / 100;
     // setSongInfo({ ...songInfo, volume: isActiveVolume ? songMuted : songInitialState.volume });
-    setIsActiveVolume(!isActiveVolume);
     // } else {
     //   console.error('Error with mute button');
     // }
@@ -72,14 +74,16 @@ export default function PlayerAppBar() {
     }
   };
 
-  const handleChangeSliderPosition = (_: Event, position: number | number[]) => {
+  const handleChangeSliderPosition = (_: Event, newValue: number | number[]) => {
     // if (audioRef.current) {
-    console.log('🚀 ~ handleChangeSliderPosition ~ position:', position as number);
     //   audioRef.current.currentTime = position as number;
-    setSongInfo({ ...songInfo, currentTime: position as number });
     // } else {
     //   console.error('Error with song position button');
     // }
+    setSongInfo({ ...songInfo, currentTime: newValue as number });
+    const _position = Array.isArray(newValue) ? newValue[0] : newValue;
+    setPosition(_position);
+    playerRef.current?.seekTo(_position); // Atualiza a posição da mídia
   };
 
   const nextSongHandler = () => console.log('next music');
@@ -103,6 +107,7 @@ export default function PlayerAppBar() {
   const playerSettingsProps = { mobileMenuId, handleMobileMenuOpen };
   const audioProps = {
     audioUrl,
+    playerRef,
     isPlaying,
     volume: isActiveVolume ? volume / 100 : songMuted,
     timeUpdateHandler,
