@@ -40,10 +40,10 @@ const SliderProgress = ({
     <CustomSlider
       aria-label="Media slider"
       value={position}
-      min={0}
-      step={1}
-      max={duration}
       onChange={handleChangeSliderPosition}
+      step={1} // Precisão de controle no slider (0 a 1)
+      min={0}
+      max={duration}
     />
     <TinyTextRigth>{duration ? '-' + getTime(duration - position) : '0:00'}</TinyTextRigth>
   </Box>
