@@ -1,22 +1,22 @@
 import React from 'react';
+import ReactPlayer from 'react-player';
 import { Box, AppBar, Toolbar } from '@mui/material';
-import { OnProgressProps } from 'react-player/base';
+
+import Audio, { SongInfoProps } from '../../components/audio';
+// import { songsList } from 'components/audio/data';
+import useAudioPlayer from '../../hooks/media/useAudioPlayer';
 
 import Volume from './Volume';
-import MenuBar from './MenuBar';
+import MenuBar from './Settings';
 import PlayerLogo from './PlayerLogo';
 import PlayerTools from './PlayerTools';
 import PlayerControl from './PlayerControl';
 import SliderProgress from './SliderProgress';
 import PlayerSettings from './PlayerSettings';
 
-import Audio from '../../components/audio';
-// import { songsList } from 'components/audio/data';
-import useAudioPlayer from '../../hooks/media/useAudioPlayer';
-import ReactPlayer from 'react-player';
-
 export default function PlayerAppBar() {
-  const url = 'https://www.youtube.com/watch?v=luOEoasGUK0';
+  const menuId = 'player-menu';
+  const mobileMenuId = 'player-menu-mobile';
   const songMuted = 0;
   const volumeSongActived = true;
   const songInitialState = {
@@ -25,16 +25,18 @@ export default function PlayerAppBar() {
     animationPercent: 0,
     volume: 50,
   };
+  const url = 'https://www.youtube.com/watch?v=luOEoasGUK0';
 
   const { audioUrl, isPlaying, songTitle, handlePlaySong } = useAudioPlayer(url);
   const playerRef = React.useRef<ReactPlayer>(null);
 
+  const [position, setPosition] = React.useState<number>(0);
+  const [volume, setVolume] = React.useState<number>(songInitialState.volume);
+  const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
+
+  const [songInfo, setSongInfo] = React.useState<SongInfoProps>(songInitialState);
   // const [songs, setSongs] = React.useState(songsList());
   // const [currentSong, setCurrentSong] = React.useState(songs[0]);
-  const [songInfo, setSongInfo] = React.useState(songInitialState);
-  const [volume, setVolume] = React.useState(songInitialState.volume);
-  const [position, setPosition] = React.useState(0);
-  const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -57,52 +59,16 @@ export default function PlayerAppBar() {
 
   const handleActiveVolume = () => {
     setIsActiveVolume(!isActiveVolume);
-    // if (audioRef.current) {
-    // audioRef.current.volume = isActiveVolume ? songMuted : songInitialState.volume / 100;
-    // setSongInfo({ ...songInfo, volume: isActiveVolume ? songMuted : songInitialState.volume });
-    // } else {
-    //   console.error('Error with mute button');
-    // }
-  };
-
-  const handleSetVolume = (_: Event, _volume: number | number[]) => {
-    if (isActiveVolume) {
-      setVolume(_volume as number);
-      // setSongInfo({ ...songInfo, volume: volume as number });
-    } else {
-      console.error('Error with volume button');
-    }
   };
 
   const handleChangeSliderPosition = (_: Event, newValue: number | number[]) => {
-    // if (audioRef.current) {
-    //   audioRef.current.currentTime = position as number;
-    // } else {
-    //   console.error('Error with song position button');
-    // }
     setSongInfo({ ...songInfo, currentTime: newValue as number });
     const _position = Array.isArray(newValue) ? newValue[0] : newValue;
     setPosition(_position);
     playerRef.current?.seekTo(_position); // Atualiza a posição da mídia
   };
 
-  const nextSongHandler = () => console.log('next music');
-
-  const timeUpdateHandler = (state: OnProgressProps) => {
-    const { playedSeconds: currentTime, loadedSeconds: duration } = state;
-
-    setSongInfo({
-      currentTime: Math.round(currentTime),
-      duration: Math.round(duration),
-      volume: songInfo.volume,
-      animationPercent: (Math.round(currentTime) / Math.round(duration)) * 100,
-    });
-  };
-
-  const menuId = 'player-menu';
-  const mobileMenuId = 'player-menu-mobile';
-
-  const playerControlProps = { handlePlaySong, nextSongHandler, isPlaying };
+  const playerControlProps = { handlePlaySong, isPlaying };
   const playerToolsProps = { menuId, handleProfileMenuOpen };
   const playerSettingsProps = { mobileMenuId, handleMobileMenuOpen };
   const audioProps = {
@@ -110,13 +76,14 @@ export default function PlayerAppBar() {
     playerRef,
     isPlaying,
     volume: isActiveVolume ? volume / 100 : songMuted,
-    timeUpdateHandler,
+    songInfo,
+    setSongInfo,
   };
   const volumeProps = {
     handleActiveVolume,
     isActiveVolume,
     volume,
-    handleSetVolume,
+    setVolume,
   };
   const menuBarProps = {
     menuId,
@@ -145,12 +112,12 @@ export default function PlayerAppBar() {
           <SliderProgress {...sliderPositionProps} />
           <Volume {...volumeProps} />
           <Box sx={{ flexGrow: 1 }} /> {/* DIVIDER */}
-          <PlayerTools {...playerToolsProps} />
+          <PlayerTools {...playerToolsProps} /> //* Playlists, CloseFullscreen, Settings, Download
           <PlayerSettings {...playerSettingsProps} />
           <Audio {...audioProps} />
+          <MenuBar {...menuBarProps} />
         </Toolbar>
       </AppBar>
-      <MenuBar {...menuBarProps} />
     </Box>
   );
 }
