@@ -1,6 +1,6 @@
 import { Box, Stack, IconButton } from '@mui/material';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { CustomSlider } from './styles';
+import { CustomSlider } from './SliderMediaProgress/styles';
 
 interface VolumeProps {
   volume: number | number[];

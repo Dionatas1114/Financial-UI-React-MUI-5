@@ -1,14 +1,14 @@
 import { Box, Typography } from '@mui/material';
 import { CustomSlider, TinyTextLeft, TinyTextRigth } from './styles';
 
-interface SliderProgressProps {
+interface SliderMediaProgressProps {
   songTitle: string;
   position: number;
   duration: number;
   handleChangeSliderPosition: (_: Event, volume: number | number[]) => void;
 }
 
-export type { SliderProgressProps };
+export type { SliderMediaProgressProps };
 
 const getTime = (time: number) => {
   const minute = Math.floor(time / 60);
@@ -16,12 +16,12 @@ const getTime = (time: number) => {
   return `${minute}:${secondLeft}`;
 };
 
-const SliderProgress = ({
+const SliderMediaProgress = ({
   songTitle,
   position,
   duration,
   handleChangeSliderPosition,
-}: SliderProgressProps) => (
+}: SliderMediaProgressProps) => (
   <Box
     sx={{
       width: '100%',
@@ -49,4 +49,4 @@ const SliderProgress = ({
   </Box>
 );
 
-export default SliderProgress;
+export default SliderMediaProgress;
