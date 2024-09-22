@@ -1,5 +1,9 @@
 import { Box, IconButton } from '@mui/material';
-import { PauseRounded, PlayArrowRounded, SkipNextRounded } from '@mui/icons-material';
+import {
+  PauseRounded as PauseIcon,
+  PlayArrowRounded as PlayIcon,
+  SkipNextRounded as NextIcon,
+} from '@mui/icons-material';
 
 interface PlayerControlProps {
   isPlaying: boolean;
@@ -15,13 +19,13 @@ const PlayerControl = ({ isPlaying, handlePlaySong }: PlayerControlProps) => {
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <IconButton aria-label={isPlaying ? 'play' : 'pause'} onClick={handlePlaySong}>
         {isPlaying ? (
-          <PauseRounded sx={{ fontSize: '3rem' }} />
+          <PauseIcon sx={{ fontSize: '3rem' }} />
         ) : (
-          <PlayArrowRounded sx={{ fontSize: '3rem' }} />
+          <PlayIcon sx={{ fontSize: '3rem' }} />
         )}
       </IconButton>
       <IconButton aria-label="next media control" onClick={nextSongHandler}>
-        <SkipNextRounded />
+        <NextIcon />
       </IconButton>
     </Box>
   );

@@ -1,8 +1,6 @@
-import { Box, Typography } from '@mui/material';
 import { CustomSlider, TinyTextLeft, TinyTextRigth } from './styles';
 
 interface SliderMediaProgressProps {
-  songTitle: string;
   position: number;
   duration: number;
   handleChangeSliderPosition: (_: Event, volume: number | number[]) => void;
@@ -17,25 +15,11 @@ const getTime = (time: number) => {
 };
 
 const SliderMediaProgress = ({
-  songTitle,
   position,
   duration,
   handleChangeSliderPosition,
 }: SliderMediaProgressProps) => (
-  <Box
-    sx={{
-      width: '100%',
-      marginRight: '1em',
-      display: 'flex',
-    }}
-  >
-    <Typography
-      aria-label="Media Title"
-      noWrap
-      letterSpacing={-0.25}
-      sx={(theme) => ({ margin: theme.spacing(1, 3, 0, 1) })}
-      children={songTitle}
-    />
+  <>
     <TinyTextLeft>{getTime(position)}</TinyTextLeft>
     <CustomSlider
       aria-label="Media slider"
@@ -44,9 +28,11 @@ const SliderMediaProgress = ({
       step={1} // Precisão de controle no slider (0 a 1)
       min={0}
       max={duration}
+      valueLabelDisplay="auto" // Exibe o valor no slider durante a interação
+      valueLabelFormat={getTime} // Formata o valor usando a função getTime
     />
     <TinyTextRigth>{duration ? '-' + getTime(duration - position) : '0:00'}</TinyTextRigth>
-  </Box>
+  </>
 );
 
 export default SliderMediaProgress;

@@ -7,11 +7,12 @@ import Audio, { SongInfoProps } from '../../components/audio';
 import useAudioPlayer from '../../hooks/media/useAudioPlayer';
 
 import Volume from './Volume';
-import MenuBar from './Settings';
+import MediaTitle from './MediaTitle';
+import MenuBar from './PlayerSettings';
 import PlayerLogo from './PlayerLogo';
 import PlayerTools from './PlayerTools';
 import PlayerControl from './PlayerControl';
-import PlayerSettings from './PlayerSettings';
+import PlayerSettings from './PlayerSettings/PlayerSettings';
 import SliderMediaProgress from './SliderMediaProgress';
 
 export default function PlayerAppBar() {
@@ -94,8 +95,8 @@ export default function PlayerAppBar() {
     handleMobileMenuClose,
     handleProfileMenuOpen,
   };
+  const mediaTitleProps = { isPlaying, songTitle };
   const sliderPositionProps = {
-    songTitle,
     position: songInfo.currentTime,
     duration: songInfo.duration,
     handleChangeSliderPosition,
@@ -107,6 +108,7 @@ export default function PlayerAppBar() {
         <Toolbar>
           <PlayerLogo />
           <PlayerControl {...playerControlProps} />
+          <MediaTitle {...mediaTitleProps} />
           <SliderMediaProgress {...sliderPositionProps} />
           <Volume {...volumeProps} />
           <Box sx={{ flexGrow: 1 }} /> {/* DIVIDER */}
