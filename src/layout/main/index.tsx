@@ -6,8 +6,8 @@ import Cryptos, { Crypto } from '../../hooks/cryptos';
 
 // import { myStocks } from 'mocks/stocks';
 import Header from '../../layout/header';
-import PlayerAppBar from '../../layout/footer/PlayerAppBar';
 import CustomGrid from '../../components/grid';
+import PlayerAppBar from '../footer';
 
 export default function Main() {
   const { handleClickShowStocks, cryptos } = Cryptos();

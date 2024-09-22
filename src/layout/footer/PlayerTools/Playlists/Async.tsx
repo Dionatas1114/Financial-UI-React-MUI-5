@@ -1,51 +1,37 @@
 import React from 'react';
-import { TextField, Autocomplete, CircularProgress, styled, lighten, darken } from '@mui/material';
-import usePlaylistListing from '../../../../hooks/media/usePlaylistListing';
+import { TextField, Autocomplete, CircularProgress } from '@mui/material';
 
-// colocar num arquivo styles.ts
-const GroupHeader = styled('div')(({ theme }) => ({
-  position: 'sticky',
-  top: '-8px',
-  padding: '4px 10px',
-  color: theme.palette.primary.main,
-  backgroundColor:
-    theme.palette.mode === 'light'
-      ? lighten(theme.palette.primary.light, 0.85)
-      : darken(theme.palette.primary.main, 0.8),
-}));
-
-const GroupItems = styled('ul')({
-  padding: 0,
-});
+import { GroupHeader, GroupItems } from './styles';
+import usePlaylistListing, { FormattedOption } from '../../../../hooks/media/usePlaylistListing';
 
 export default function Asynchronous() {
-  const { handlePlaylistListing, playlists } = usePlaylistListing();
+  const { handleOpen, isLoading, open, setOpen, playlists } = usePlaylistListing();
 
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState<any[]>([]); //tipar isso
   const [selectedOption, setSelectedOption] = React.useState<any>(null); //tipar isso
+  // const [open, setOpen] = React.useState(false);
+  // const [options, setOptions] = React.useState<FormattedOption[]>([]);
 
-  const isLoading = open && options.length === 0;
+  // const isLoading = open && options.length === 0;
 
-  // criar hook e tipar
-  React.useEffect(() => {
-    let active = true;
+  // // criar hook e tipar
+  // React.useEffect(() => {
+  //   let active = true;
 
-    const fetchPlaylists = async () => {
-      await handlePlaylistListing();
-      if (active) setOptions(playlists);
-    };
+  //   const fetchPlaylists = async () => {
+  //     await handlePlaylistListing();
+  //     if (active) setOptions(playlists);
+  //   };
 
-    if (isLoading) fetchPlaylists();
+  //   if (isLoading) fetchPlaylists();
 
-    return () => {
-      active = false;
-    };
-  }, [handlePlaylistListing, isLoading]);
+  //   return () => {
+  //     active = false;
+  //   };
+  // }, [handlePlaylistListing, isLoading]);
 
-  React.useEffect(() => {
-    if (!open) setOptions([]);
-  }, [open]);
+  // React.useEffect(() => {
+  //   if (!open) setOptions([]);
+  // }, [open]);
 
   const handleOptionChange = (_: React.ChangeEvent<{}>, songSelected: any) => {
     console.log('🚀 ~ handleOptionChange ~ songSelected:', songSelected); //tipar isso
@@ -56,14 +42,14 @@ export default function Asynchronous() {
   return (
     <Autocomplete
       id="playlists"
-      options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+      options={playlists.sort((a: FormattedOption, b: FormattedOption) => -b.firstLetter.localeCompare(a.firstLetter))}
       groupBy={(option) => option.firstLetter}
       getOptionLabel={(option) => option.title}
       sx={{ width: 300 }}
       loading={isLoading}
       open={open}
-      onOpen={() => setOpen(true)}
-      onClose={() => setOpen(false)}
+      onOpen={handleOpen}
+      onClose={handleOpen}
       onChange={handleOptionChange}
       renderInput={(params) => (
         <TextField

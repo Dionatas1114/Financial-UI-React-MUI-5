@@ -1,17 +1,26 @@
 import { Box, Stack, IconButton } from '@mui/material';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { CustomSlider } from './styles';
+import { CustomSlider } from '../SliderMediaProgress/styles';
 
 interface VolumeProps {
   volume: number | number[];
   isActiveVolume: boolean;
   handleActiveVolume: (event: React.MouseEvent<HTMLElement>) => void;
-  handleSetVolume: any;
+  setVolume: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export type { VolumeProps };
 
-function Volume({ handleActiveVolume, isActiveVolume, volume, handleSetVolume }: VolumeProps) {
+function Volume({ handleActiveVolume, isActiveVolume, volume, setVolume }: VolumeProps) {
+  const handleSetVolume = (_: Event, _volume: number | number[]) => {
+    if (isActiveVolume) {
+      setVolume(_volume as number);
+      // setSongInfo({ ...songInfo, volume: volume as number });
+    } else {
+      console.error('Error with volume button');
+    }
+  };
+
   return (
     <Box sx={{ width: 200, mr: 1, display: { sm: 'block' } }}>
       <Stack spacing={2} direction="row" alignItems="center">
