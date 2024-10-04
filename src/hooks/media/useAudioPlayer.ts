@@ -16,7 +16,9 @@ export default function useAudioPlayer(videoUrl: string) {
           const { data, headers } = await mediaBlobApi.post('/audio/stream', {
             videoUrl,
           });
-          const songTitleFromHeader = headers['cache-control']?.toString() || '';
+
+          const songTitleFromHeader =
+            headers['x-music-title']?.toString() || 'Título não disponível';
           const audioSource = URL.createObjectURL(data);
 
           setSongTitle(songTitleFromHeader);
