@@ -11,6 +11,7 @@ Projeto Frontend para cotação de ações na Bolsa de Valores Brasileira (B3).
 ## ⚙️ API'𝘀 usadas na aplicação ##
 
 - 📈 [Brapi](https://brapi.dev/)
+- 🎶 [Media Download Module](https://media-download.onrender.com)
 
 ## 🌐 Deploy da Página 🖥️
 
