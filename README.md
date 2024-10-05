@@ -16,4 +16,4 @@ Projeto Frontend para cotação de ações na Bolsa de Valores Brasileira (B3).
 
 | ☁️ Server1 | [Bohr](https://financial-ui.bohr.io/)                     |
 | ---------- | --------------------------------------------------------- |
-| ☁️ Server2 | [Netlify](https://dashing-madeleine-a0c40b.netlify.app/)  |
+| ☁️ Server2 | [Netlify](https://financial-ui.netlify.app/)  |
