@@ -13,7 +13,7 @@ export default function useAudioPlayer(videoUrl: string) {
     const delayDebounceFetch = setTimeout(async () => {
       if (isPlaying && !audioUrl) {
         try {
-          const { data, headers } = await mediaBlobApi.post('/audio/listen', {
+          const { data, headers } = await mediaBlobApi.post('/audio/stream', {
             videoUrl,
           });
 
