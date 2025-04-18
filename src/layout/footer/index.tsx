@@ -5,6 +5,7 @@ import { Box, AppBar, Toolbar } from '@mui/material';
 import Audio, { SongInfoProps } from '../../components/audio';
 // import { songsList } from 'components/audio/data';
 import useAudioPlayer from '../../hooks/media/useAudioPlayer';
+import useJamendoTracks from '../../hooks/jamendo/useJamendoTracks';
 
 import Volume from './Volume';
 import MediaTitle from './MediaTitle';
@@ -28,7 +29,16 @@ export default function PlayerAppBar() {
   };
   const url = 'https://www.youtube.com/watch?v=luOEoasGUK0';
 
-  const { audioUrl, isPlaying, songTitle, handlePlaySong } = useAudioPlayer(url);
+  // const { audioUrl, isPlaying, songTitle, handlePlaySong } = useAudioPlayer(url);
+  const {
+    songs,
+    isPlaying,
+    setIsPlaying,
+    handlePlaySong,
+    actualSong,
+    indexAtual,
+    nextSongHandler,
+  } = useJamendoTracks('rock');
   const playerRef = React.useRef<ReactPlayer>(null);
 
   const [volume, setVolume] = React.useState<number>(songInitialState.volume);
@@ -67,16 +77,17 @@ export default function PlayerAppBar() {
     playerRef.current?.seekTo(position);
   };
 
-  const playerControlProps = { handlePlaySong, isPlaying };
+  const playerControlProps = { handlePlaySong, isPlaying, nextSongHandler };
   const playerToolsProps = { menuId, handleProfileMenuOpen };
   const playerSettingsProps = { mobileMenuId, handleMobileMenuOpen };
   const audioProps = {
-    audioUrl,
+    audioUrl: actualSong?.audio,
     playerRef,
     isPlaying,
     volume: isActiveVolume ? volume / 100 : songMuted,
     songInfo,
     setSongInfo,
+    nextSongHandler,
   };
   const volumeProps = {
     handleActiveVolume,
@@ -95,7 +106,7 @@ export default function PlayerAppBar() {
     handleMobileMenuClose,
     handleProfileMenuOpen,
   };
-  const mediaTitleProps = { isPlaying, songTitle };
+  const mediaTitleProps = { isPlaying, songTitle: actualSong?.name || '' };
   const sliderPositionProps = {
     position: songInfo.currentTime,
     duration: songInfo.duration,
@@ -112,7 +123,8 @@ export default function PlayerAppBar() {
           <SliderMediaProgress {...sliderPositionProps} />
           <Volume {...volumeProps} />
           <Box sx={{ flexGrow: 1 }} /> {/* DIVIDER */}
-          <PlayerTools {...playerToolsProps} /> {/* Playlists, CloseFullscreen, Settings, Download */}
+          {/* Playlists, CloseFullscreen, Settings, Download */}
+          <PlayerTools {...playerToolsProps} />
           <PlayerSettings {...playerSettingsProps} />
           <Audio {...audioProps} />
           <MenuBar {...menuBarProps} />

@@ -27,13 +27,20 @@ interface AudioProps {
   timeUpdateHandler?: (state: OnProgressProps) => void;
   songInfo: SongInfoProps;
   setSongInfo: React.Dispatch<React.SetStateAction<SongInfoProps>>;
+  nextSongHandler: () => void;
 }
 
 export type { SongInfoProps, SongProps, AudioProps };
 
-const Audio = ({ audioUrl, playerRef, isPlaying, volume, songInfo, setSongInfo }: AudioProps) => {
-  // const playerRef = React.useRef<ReactPlayer>(null);
-
+const Audio = ({
+  audioUrl,
+  playerRef,
+  isPlaying,
+  volume,
+  songInfo,
+  setSongInfo,
+  nextSongHandler,
+}: AudioProps) => {
   const timeUpdateHandler = (state: OnProgressProps) =>
     setSongInfo({
       currentTime: Math.round(state.playedSeconds), // CurrentTime
@@ -50,6 +57,7 @@ const Audio = ({ audioUrl, playerRef, isPlaying, volume, songInfo, setSongInfo }
         playing={isPlaying}
         volume={volume}
         onProgress={timeUpdateHandler}
+        onEnded={nextSongHandler}
         stopOnUnmount
       />
     </Box>
