@@ -8,13 +8,12 @@ import {
 interface PlayerControlProps {
   isPlaying: boolean;
   handlePlaySong: () => void;
+  nextSongHandler: () => void;
 }
 
 export type { PlayerControlProps };
 
-const PlayerControl = ({ isPlaying, handlePlaySong }: PlayerControlProps) => {
-  const nextSongHandler = () => console.log('next music');
-
+const PlayerControl = ({ isPlaying, handlePlaySong, nextSongHandler }: PlayerControlProps) => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <IconButton aria-label={isPlaying ? 'play' : 'pause'} onClick={handlePlaySong}>
