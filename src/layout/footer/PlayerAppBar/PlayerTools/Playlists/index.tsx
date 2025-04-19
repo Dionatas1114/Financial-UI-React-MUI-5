@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge, IconButton, Menu } from '@mui/material';
 import { PlaylistPlay } from '@mui/icons-material';
-import usePlaylistListing from '../../../../hooks/media/usePlaylistListing';
+import usePlaylistListing from '../../../../../hooks/media/usePlaylistListing';
 import Asynchronous from './Async';
 
 export default function Playlists() {

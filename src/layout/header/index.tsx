@@ -2,7 +2,6 @@ import { Box, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
 import { Menu as MenuIcon, Search as SearchIcon } from '@mui/icons-material';
 import { SearchIconWrapper, StyledInputBase, Search, Children } from './style';
 import SwitchTheme from '../../components/switchTheme';
-import { MouseJiggler } from '../../hooks/mouseJiggler';
 
 const Header = ({ children }: ChildrenProps) => (
   <Box sx={{ flexGrow: 1 }}>
@@ -30,7 +29,6 @@ const Header = ({ children }: ChildrenProps) => (
           <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
         </Search>
         <Box sx={{ flexGrow: 1 }} />
-        <MouseJiggler />
         <Children children={children} />
         <SwitchTheme />
       </Toolbar>

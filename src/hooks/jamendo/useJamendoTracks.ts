@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+const { VITE_JAMENDO_API_URL, VITE_JAMENDO_CLIENT_ID } = import.meta.env;
+
 type Song = {
   id: string;
   name: string;
@@ -13,8 +15,6 @@ export default function useJamendoTracks(genero = 'chillout') {
   const [songs, setSongs] = useState<Song[]>([]);
   const [indexAtual, setIndexAtual] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audioUrl, setAudioSource] = useState('');
-  const [songTitle, setSongTitle] = useState('');
   const actualSong = songs[indexAtual];
 
   const handlePlaySong = () => setIsPlaying((prev) => !prev);
@@ -26,16 +26,11 @@ export default function useJamendoTracks(genero = 'chillout') {
   };
 
   useEffect(() => {
-    async function buscarMusicas() {
+    const fetchSongs = async () => {
       try {
-        // const resp = await fetch(
-        //   `${import.meta.env.JAMENDO_API_URL!}/tracks/?client_id=${import.meta.env
-        //     .VITE_JAMENDO_CLIENT_ID!}&format=json&limit=5&audioformat=mp32&tags=${genero}`
-        // );
-        // const data = await resp.json();
-        const { data } = await axios.get(`${import.meta.env.VITE_JAMENDO_API_URL}/tracks/`, {
+        const { data } = await axios.get(`${VITE_JAMENDO_API_URL}/tracks/`, {
           params: {
-            client_id: import.meta.env.VITE_JAMENDO_CLIENT_ID,
+            client_id: VITE_JAMENDO_CLIENT_ID,
             format: 'json',
             limit: 5,
             audioformat: 'mp31',
@@ -46,21 +41,17 @@ export default function useJamendoTracks(genero = 'chillout') {
         setSongs(data.results);
       } catch (err) {
         console.error('Erro ao buscar músicas:', err);
-      } finally {
-        setIsPlaying(true);
       }
-    }
+    };
 
-    buscarMusicas();
+    fetchSongs();
   }, [genero]);
 
   return {
-    songs,
     isPlaying,
-    setIsPlaying,
-    nextSongHandler,
-    indexAtual,
-    actualSong,
     handlePlaySong,
+    actualSong,
+    nextSongHandler,
+    setIsPlaying,
   };
 }

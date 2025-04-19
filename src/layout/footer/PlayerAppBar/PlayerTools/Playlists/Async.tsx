@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, Autocomplete, CircularProgress } from '@mui/material';
 
 import { GroupHeader, GroupItems } from './styles';
-import usePlaylistListing, { FormattedOption } from '../../../../hooks/media/usePlaylistListing';
+import usePlaylistListing, { FormattedOption } from '../../../../../hooks/media/usePlaylistListing';
 
 export default function Asynchronous() {
   const { handleOpen, isLoading, open, setOpen, playlists } = usePlaylistListing();
@@ -42,7 +42,9 @@ export default function Asynchronous() {
   return (
     <Autocomplete
       id="playlists"
-      options={playlists.sort((a: FormattedOption, b: FormattedOption) => -b.firstLetter.localeCompare(a.firstLetter))}
+      options={playlists.sort(
+        (a: FormattedOption, b: FormattedOption) => -b.firstLetter.localeCompare(a.firstLetter)
+      )}
       groupBy={(option) => option.firstLetter}
       getOptionLabel={(option) => option.title}
       sx={{ width: 300 }}
