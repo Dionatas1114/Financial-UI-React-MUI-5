@@ -26,9 +26,8 @@ export default function useJamendoTracks(genero = 'chillout') {
   };
 
   useEffect(() => {
-    const delayDebounceFetch = setTimeout(async () => {
+    const fetchSongs = async () => {
       try {
-        // buscarMusicas();
         const { data } = await axios.get(`${VITE_JAMENDO_API_URL}/tracks/`, {
           params: {
             client_id: VITE_JAMENDO_CLIENT_ID,
@@ -42,20 +41,17 @@ export default function useJamendoTracks(genero = 'chillout') {
         setSongs(data.results);
       } catch (err) {
         console.error('Erro ao buscar músicas:', err);
-      } finally {
-        setIsPlaying(true);
       }
-    }, 500);
-    return () => clearTimeout(delayDebounceFetch);
-  }, [genero, isPlaying]);
+    };
+
+    fetchSongs();
+  }, [genero]);
 
   return {
-    songs,
     isPlaying,
-    setIsPlaying,
-    nextSongHandler,
-    indexAtual,
-    actualSong,
     handlePlaySong,
+    actualSong,
+    nextSongHandler,
+    setIsPlaying,
   };
 }

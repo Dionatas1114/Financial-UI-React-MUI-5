@@ -3,8 +3,6 @@ import ReactPlayer from 'react-player';
 import { Box, AppBar, Toolbar } from '@mui/material';
 
 import Audio, { SongInfoProps } from '../../../components/audio';
-// import { songsList } from 'components/audio/data';
-// import useAudioPlayer from '../../../hooks/media/useAudioPlayer';
 import useJamendoTracks from '../../../hooks/jamendo/useJamendoTracks';
 
 import Volume from './Volume';
@@ -28,16 +26,12 @@ export default function PlayerAppBar() {
     volume: 50,
   };
 
-  // const { audioUrl, isPlaying, songTitle, handlePlaySong } = useAudioPlayer(url);
-  const { isPlaying, handlePlaySong, actualSong, nextSongHandler } = useJamendoTracks('rock');
   const playerRef = React.useRef<ReactPlayer>(null);
+  const { isPlaying, handlePlaySong, actualSong, nextSongHandler } = useJamendoTracks('rock');
 
   const [volume, setVolume] = React.useState<number>(songInitialState.volume);
   const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
-
   const [songInfo, setSongInfo] = React.useState<SongInfoProps>(songInitialState);
-  // const [songs, setSongs] = React.useState(songsList());
-  // const [currentSong, setCurrentSong] = React.useState(songs[0]);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);

@@ -41,13 +41,17 @@ const Audio = ({
   setSongInfo,
   nextSongHandler,
 }: AudioProps) => {
-  const timeUpdateHandler = (state: OnProgressProps) =>
+  const timeUpdateHandler = (state: OnProgressProps) => {
+    const { playedSeconds, loadedSeconds } = state;
+    const duration = playerRef.current?.getDuration?.() ?? loadedSeconds;
+
     setSongInfo({
-      currentTime: Math.round(state.playedSeconds), // CurrentTime
-      duration: Math.round(state.loadedSeconds), // Duration
+      currentTime: Math.round(playedSeconds),
+      duration: Math.round(duration),
       volume: songInfo.volume,
-      animationPercent: (Math.round(state.playedSeconds) / Math.round(state.loadedSeconds)) * 100,
+      animationPercent: (playedSeconds / duration) * 100,
     });
+  };
 
   return (
     <Box sx={{ display: 'none' }}>
