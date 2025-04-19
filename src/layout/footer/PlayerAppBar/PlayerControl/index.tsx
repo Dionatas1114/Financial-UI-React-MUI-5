@@ -14,6 +14,7 @@ interface PlayerControlProps {
 export type { PlayerControlProps };
 
 const PlayerControl = ({ isPlaying, handlePlaySong, nextSongHandler }: PlayerControlProps) => {
+  console.log('🚀 ~ PlayerControl ~ isPlaying:', isPlaying);
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <IconButton aria-label={isPlaying ? 'play' : 'pause'} onClick={handlePlaySong}>
