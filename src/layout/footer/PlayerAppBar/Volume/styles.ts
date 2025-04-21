@@ -4,6 +4,7 @@ const boxShadow = '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1p
 
 export const VolumeSlider = styled(Slider)(({ theme }) => ({
   color: theme.palette.mode === 'dark' ? '#0a84ff' : '#007bff',
+  height: '80%',
   padding: '0 0 0 0',
   '& .MuiSlider-thumb': {
     height: 16,

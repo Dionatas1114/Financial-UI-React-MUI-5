@@ -16,7 +16,7 @@ export default function useJamendoTracks(genero = 'rock') {
   const [indexAtual, setIndexAtual] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  console.log('🚀 ~ useJamendoTracks ~ isPlaying: ', isPlaying, ', isReady: ', isReady);
+
   const actualSong = songs[indexAtual];
 
   const handlePlaySong = () => {

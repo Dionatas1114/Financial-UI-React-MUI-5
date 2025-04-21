@@ -18,17 +18,13 @@ function Volume({ handleActiveVolume, isActiveVolume, volume, setVolume }: Volum
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setAnchorEl(event.currentTarget);
     setShowSlider(true);
   };
 
   const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setShowSlider(false);
-    }, 500); // 500ms delay pra sumir
+    timeoutRef.current = setTimeout(() => setShowSlider(false), 500); // 500ms delay pra sumir
   };
 
   const handleSetVolume = (_: Event, _volume: number | number[]) => {
