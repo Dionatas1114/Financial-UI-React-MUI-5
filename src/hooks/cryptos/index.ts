@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { AxiosResponse } from 'axios';
 
 import myCryptos from '../../mocks/cryptos';
-import { brapiApi, cryptoCompareApi, cryptoCompareBaseURL } from '../../services/api';
-// import { round, split } from 'utils/functions';
 import currencies from '../../mocks/currencies';
+import { cryptoCompareApi, cryptoCompareBaseURL } from '../../services/api';
+// import { round, split } from 'utils/functions';
 
 interface Crypto {
   id: number;
@@ -23,17 +23,10 @@ const cryptoBaseURL = cryptoCompareBaseURL.replace('min-api', 'www');
 
 export default function useCryptos() {
   const [cryptos, setCryptos] = useState<Crypto[] | []>([]);
-  // const { cryptos, fetchCryptos } = Cryptos();
-
-  // const handleClickShowStocks = async () => {
-  //   // await fetchStocks(myStocks);
-  //   await fetchCryptos();
-  // };
-
   const fetchCryptos = async () => {
     try {
+      //pricemulti
       const { data }: AxiosResponse<any> = await cryptoCompareApi.get('data/pricemultifull', {
-        //pricemulti
         params: {
           fsyms: myCryptos.join(','),
           tsyms: currency,
@@ -52,40 +45,15 @@ export default function useCryptos() {
         })
       );
 
-      // const cryptos: Crypto[] = Object.entries(data)?.map(
-      //   ([coin, marketPrice]: any, index: number) => ({
-      //     id: index + 1,
-      //     currency,
-      //     coinName: coin,
-      //     regularMarketPrice: marketPrice[currency],
-      //     // regularMarketChangePercent: round(crypto.regularMarketChangePercent),
-      //     // regularMarketChange: round(crypto.regularMarketChange),
-      //     // coinImageUrl: crypto.coinImageUrl,
-      //   })
-      // );
-
-      // const cryptos: Crypto[] = data?.coins?.map((crypto: Crypto, index: number) => ({
-      //   id: index + 1,
-      //   currency: crypto.currency,
-      //   coinName: split(crypto.coinName),
-      //   regularMarketPrice: round(crypto.regularMarketPrice),
-      //   regularMarketChangePercent: round(crypto.regularMarketChangePercent),
-      //   regularMarketChange: round(crypto.regularMarketChange),
-      //   coinImageUrl: crypto.coinImageUrl,
-      // }));
-
       setCryptos(cryptos);
     } catch (err) {
       console.log('🚀 ~ file: index.ts:34 ~ fetchCryptos ~ err', err);
     }
   };
 
-  const handleClickShowStocks = async () => {
-    // await fetchStocks(myStocks);
-    await fetchCryptos();
-  };
+  const handleClickShowStocks = async () => await fetchCryptos();
 
-  console.log('🚀 ~ file: index.tsx:11 ~ StocksGrid ~ cryptos', cryptos);
+  console.log('🚀 ~ file: index.tsx:88 ~ StocksGrid ~ cryptos', cryptos);
 
   return { handleClickShowStocks, cryptos };
 }

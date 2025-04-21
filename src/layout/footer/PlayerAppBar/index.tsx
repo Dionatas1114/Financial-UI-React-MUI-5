@@ -3,7 +3,10 @@ import ReactPlayer from 'react-player';
 import { Box, AppBar, Toolbar } from '@mui/material';
 
 import Audio, { SongInfoProps } from '../../../components/audio';
-import useJamendoTracks from '../../../hooks/jamendo/useJamendoTracks';
+import { useJamendoPlayer } from '../../../context/JamendoPlayerContext';
+// import { JamendoPlayerProvider } from '../../../context/JamendoPlayerProvider';
+// import useJamendoTracks from 'hooks/jamendo/useJamendoTracks';
+// import { JamendoPlayerProvider } from '../../../context/JamendoPlayerProvider';
 
 import Volume from './Volume';
 import MediaTitle from './MediaTitle';
@@ -27,7 +30,8 @@ export default function PlayerAppBar() {
   };
 
   const playerRef = React.useRef<ReactPlayer>(null);
-  const { isPlaying, handlePlaySong, actualSong, nextSongHandler } = useJamendoTracks('rock');
+  const { isPlaying, handlePlaySong, actualSong, nextSongHandler, setIsPlaying } =
+    useJamendoPlayer();
 
   const [volume, setVolume] = React.useState<number>(songInitialState.volume);
   const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
@@ -73,6 +77,7 @@ export default function PlayerAppBar() {
     songInfo,
     setSongInfo,
     nextSongHandler,
+    setIsPlaying,
   };
   const volumeProps = {
     handleActiveVolume,
@@ -106,8 +111,8 @@ export default function PlayerAppBar() {
           <PlayerControl {...playerControlProps} />
           <MediaTitle {...mediaTitleProps} />
           <SliderMediaProgress {...sliderPositionProps} />
-          <Volume {...volumeProps} />
           <Box sx={{ flexGrow: 1 }} /> {/* DIVIDER */}
+          <Volume {...volumeProps} />
           {/* Playlists, CloseFullscreen, Settings, Download */}
           <PlayerTools {...playerToolsProps} />
           <PlayerSettings {...playerSettingsProps} />

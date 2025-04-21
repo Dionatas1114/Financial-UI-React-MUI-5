@@ -7,7 +7,7 @@ import { Grid, Paper, Typography, Avatar } from '@mui/material'; //Chip
 interface CustomGridPros {
   id: number;
   currency: string;
-  price: string;
+  price: string | number;
   shortName: string;
   logourl: string;
   // symbol: string;
