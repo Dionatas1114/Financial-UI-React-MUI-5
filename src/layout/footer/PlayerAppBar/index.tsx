@@ -1,21 +1,21 @@
 import React from 'react';
+import { Box, AppBar, Toolbar, CardMedia } from '@mui/material';
+
 import ReactPlayer from 'react-player';
-import { Box, AppBar, Toolbar } from '@mui/material';
 
 import Audio, { SongInfoProps } from '../../../components/audio';
 import { useJamendoPlayer } from '../../../context/JamendoPlayerContext';
-// import { JamendoPlayerProvider } from '../../../context/JamendoPlayerProvider';
-// import useJamendoTracks from 'hooks/jamendo/useJamendoTracks';
-// import { JamendoPlayerProvider } from '../../../context/JamendoPlayerProvider';
 
-import Volume from './Volume';
+import AlbumArt from './AlbumArt';
+// import DialogSelect from './DialogSelect';
 import MediaTitle from './MediaTitle';
-import MenuBar from './PlayerSettings';
-import PlayerLogo from './PlayerLogo';
-import PlayerTools from './PlayerTools';
 import PlayerControl from './PlayerControl';
+import PlayerLogo from './PlayerLogo';
+import MenuBar from './PlayerSettings';
 import PlayerSettings from './PlayerSettings/PlayerSettings';
+import PlayerTools from './PlayerTools';
 import SliderMediaProgress from './SliderMediaProgress';
+import Volume from './Volume';
 
 export default function PlayerAppBar() {
   const menuId = 'player-menu';
@@ -96,7 +96,10 @@ export default function PlayerAppBar() {
     handleMobileMenuClose,
     handleProfileMenuOpen,
   };
-  const mediaTitleProps = { isPlaying, songTitle: actualSong?.name || '' };
+  const mediaTitleProps = {
+    isPlaying,
+    songTitle: `${actualSong?.name} - ${actualSong?.artist_name}`,
+  };
   const sliderPositionProps = {
     position: songInfo.currentTime,
     duration: songInfo.duration,
@@ -110,8 +113,11 @@ export default function PlayerAppBar() {
           <PlayerLogo />
           <PlayerControl {...playerControlProps} />
           <MediaTitle {...mediaTitleProps} />
+          <AlbumArt image={actualSong?.image} />
           <SliderMediaProgress {...sliderPositionProps} />
-          <Box sx={{ flexGrow: 1 }} /> {/* DIVIDER */}
+          {/* DIVIDER */}
+          {/* <Box sx={{ flexGrow: 1 }} />  */}
+          {/* <DialogSelect /> */}
           <Volume {...volumeProps} />
           {/* Playlists, CloseFullscreen, Settings, Download */}
           <PlayerTools {...playerToolsProps} />

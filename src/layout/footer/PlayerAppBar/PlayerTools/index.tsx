@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, IconButton } from '@mui/material';
 import { CloseFullscreen, Download, Settings } from '@mui/icons-material';
-import Playlists from './Playlists';
+// import Playlists from './Playlists';
 
 interface PlayerToolsProps {
   menuId: string;
@@ -15,14 +15,7 @@ export default function PlayerTools(params: PlayerToolsProps) {
 
   return (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-      <Playlists />
-      <IconButton
-        aria-label="Close Fullscreen"
-        color="inherit"
-        size="large"
-        disabled
-        children={<CloseFullscreen />}
-      />
+      {/* <Playlists /> */}
       <IconButton
         size="large"
         aria-label="Settings"
@@ -38,6 +31,13 @@ export default function PlayerTools(params: PlayerToolsProps) {
         size="large"
         disabled
         children={<Download />}
+      />
+      <IconButton
+        aria-label="Close Fullscreen"
+        color="inherit"
+        size="large"
+        disabled
+        children={<CloseFullscreen />}
       />
     </Box>
   );
