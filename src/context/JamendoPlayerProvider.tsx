@@ -4,14 +4,7 @@ import axios from 'axios';
 const { VITE_JAMENDO_API_URL, VITE_JAMENDO_CLIENT_ID } = import.meta.env;
 
 import { JamendoPlayerContext } from './JamendoPlayerContext';
-
-type Song = {
-  id: string;
-  name: string;
-  artist_name: string;
-  audio: string;
-  album_name: string;
-};
+import { Song } from '../hooks/jamendo/useJamendoTracks';
 
 export function JamendoPlayerProvider({ children }: ChildrenProps) {
   const [songs, setSongs] = useState<Song[]>([]);

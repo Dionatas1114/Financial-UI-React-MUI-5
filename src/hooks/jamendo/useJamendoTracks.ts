@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 
 const { VITE_JAMENDO_API_URL, VITE_JAMENDO_CLIENT_ID } = import.meta.env;
 
-type Song = {
+export type Song = {
   id: string;
   name: string;
   artist_name: string;
   audio: string;
   album_name: string;
+  image: string;
 };
 
 export default function useJamendoTracks(genero = 'rock') {
