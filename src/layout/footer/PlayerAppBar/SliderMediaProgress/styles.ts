@@ -3,7 +3,7 @@ import { Slider, Typography, styled } from '@mui/material';
 const boxShadow = '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
 export const CustomSlider = styled(Slider)(({ theme }) => ({
-  width: '40%',
+  minWidth: '40%',
   color: theme.palette.mode === 'dark' ? '#0a84ff' : '#007bff',
   height: 5,
   padding: '15px 0',
