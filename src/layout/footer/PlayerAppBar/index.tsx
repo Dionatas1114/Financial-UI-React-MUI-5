@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, AppBar, Toolbar } from '@mui/material';
+import { Box, AppBar, Toolbar, CardMedia } from '@mui/material';
 
 import ReactPlayer from 'react-player';
 
 import Audio, { SongInfoProps } from '../../../components/audio';
 import { useJamendoPlayer } from '../../../context/JamendoPlayerContext';
 
+import AlbumArt from './AlbumArt';
 // import DialogSelect from './DialogSelect';
 import MediaTitle from './MediaTitle';
 import PlayerControl from './PlayerControl';
@@ -112,6 +113,7 @@ export default function PlayerAppBar() {
           <PlayerLogo />
           <PlayerControl {...playerControlProps} />
           <MediaTitle {...mediaTitleProps} />
+          <AlbumArt image={actualSong?.image} />
           <SliderMediaProgress {...sliderPositionProps} />
           {/* DIVIDER */}
           {/* <Box sx={{ flexGrow: 1 }} />  */}

@@ -6,6 +6,7 @@ type Song = {
   artist_name: string;
   audio: string;
   album_name: string;
+  image: string;
 };
 
 export type JamendoPlayerContextType = {
