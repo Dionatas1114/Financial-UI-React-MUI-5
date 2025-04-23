@@ -1,18 +1,40 @@
 import React from 'react';
-import { Menu, MenuItem, IconButton, Badge } from '@mui/material';
-import { Settings, PlaylistPlay } from '@mui/icons-material';
+import { Menu, MenuItem } from '@mui/material';
 
-interface MenuBarProps {
+type CommonMenuProps = {
   menuId: string;
+  anchorEl: HTMLElement | null;
+};
+
+type MenuProps = CommonMenuProps & {
+  open: boolean;
+  onClose: React.MouseEventHandler<HTMLLIElement> | undefined;
+};
+
+type MenuBarProps = CommonMenuProps & {
   mobileMenuId: string;
-  anchorEl: any;
-  mobileMoreAnchorEl: any;
+  mobileMoreAnchorEl: HTMLElement | null;
   isMenuOpen: boolean;
   isMobileMenuOpen: boolean;
   handleMenuClose: React.MouseEventHandler<HTMLLIElement> | undefined;
   handleMobileMenuClose: React.MouseEventHandler<HTMLLIElement> | undefined;
-  handleProfileMenuOpen: React.MouseEventHandler<HTMLLIElement> | undefined;
-}
+};
+
+const CommonMenu = ({ menuId, anchorEl, open, onClose }: MenuProps) => (
+  <Menu
+    id={menuId}
+    anchorEl={anchorEl}
+    open={open}
+    onClose={onClose}
+    keepMounted
+    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    sx={{ m: '-50px 20px 0 0' }}
+  >
+    <MenuItem onClick={onClose}>Profile</MenuItem>
+    <MenuItem onClick={onClose}>My account</MenuItem>
+  </Menu>
+);
 
 export default function MenuBar({
   menuId,
@@ -23,71 +45,16 @@ export default function MenuBar({
   mobileMoreAnchorEl,
   isMobileMenuOpen,
   handleMobileMenuClose,
-  handleProfileMenuOpen,
 }: MenuBarProps) {
-  const renderMenu = (
-    <Menu
-      id={menuId}
-      keepMounted
-      onClose={handleMenuClose}
-      open={isMenuOpen}
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="playlists" color="inherit">
-          <Badge badgeContent={17} color="error">
-            <PlaylistPlay />
-          </Badge>
-        </IconButton>
-        <p>Playlist</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="player-menu"
-          aria-haspopup="true"
-          color="inherit"
-          children={<Settings />}
-        />
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
-
   return (
     <>
-      {renderMobileMenu}
-      {renderMenu}
+      <CommonMenu menuId={menuId} anchorEl={anchorEl} open={isMenuOpen} onClose={handleMenuClose} />
+      <CommonMenu
+        menuId={mobileMenuId}
+        anchorEl={mobileMoreAnchorEl}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      />
     </>
   );
 }

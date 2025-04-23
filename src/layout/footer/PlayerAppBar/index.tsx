@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player';
 
 import Audio, { SongInfoProps } from '../../../components/audio';
 import { useJamendoPlayer } from '../../../context/JamendoPlayerContext';
+import { useVolumeControl } from '../../../hooks/media/useVolumeControl';
 
 import AlbumArt from './AlbumArt';
 // import DialogSelect from './DialogSelect';
@@ -21,7 +22,6 @@ export default function PlayerAppBar() {
   const menuId = 'player-menu';
   const mobileMenuId = 'player-menu-mobile';
   const songMuted = 0;
-  const volumeSongActived = true;
   const songInitialState = {
     currentTime: 0,
     duration: 0,
@@ -30,12 +30,10 @@ export default function PlayerAppBar() {
   };
 
   const playerRef = React.useRef<ReactPlayer>(null);
-  const { isPlaying, handlePlaySong, actualSong, nextSongHandler, setIsPlaying } =
-    useJamendoPlayer();
 
-  const [volume, setVolume] = React.useState<number>(songInitialState.volume);
-  const [isActiveVolume, setIsActiveVolume] = React.useState<boolean>(volumeSongActived);
   const [songInfo, setSongInfo] = React.useState<SongInfoProps>(songInitialState);
+  const volumeControl = useVolumeControl();
+  const { isPlaying, handlePlaySong, actualSong, nextSongHandler } = useJamendoPlayer();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -56,10 +54,6 @@ export default function PlayerAppBar() {
     handleMobileMenuClose();
   };
 
-  const handleActiveVolume = () => {
-    setIsActiveVolume(!isActiveVolume);
-  };
-
   const handleChangeSliderPosition = (_: Event, newValue: number | number[]) => {
     setSongInfo({ ...songInfo, currentTime: newValue as number });
     const position = Array.isArray(newValue) ? newValue[0] : newValue;
@@ -69,22 +63,17 @@ export default function PlayerAppBar() {
   const playerControlProps = { handlePlaySong, isPlaying, nextSongHandler };
   const playerToolsProps = { menuId, handleProfileMenuOpen };
   const playerSettingsProps = { mobileMenuId, handleMobileMenuOpen };
+
   const audioProps = {
     audioUrl: actualSong?.audio,
     playerRef,
     isPlaying,
-    volume: isActiveVolume ? volume / 100 : songMuted,
+    volume: volumeControl.isActiveVolume ? volumeControl.volume / 100 : songMuted,
     songInfo,
     setSongInfo,
     nextSongHandler,
-    setIsPlaying,
   };
-  const volumeProps = {
-    handleActiveVolume,
-    isActiveVolume,
-    volume,
-    setVolume,
-  };
+
   const menuBarProps = {
     menuId,
     mobileMenuId,
@@ -94,12 +83,13 @@ export default function PlayerAppBar() {
     mobileMoreAnchorEl,
     isMobileMenuOpen,
     handleMobileMenuClose,
-    handleProfileMenuOpen,
   };
+
   const mediaTitleProps = {
     isPlaying,
     songTitle: `${actualSong?.name} - ${actualSong?.artist_name}`,
   };
+
   const sliderPositionProps = {
     position: songInfo.currentTime,
     duration: songInfo.duration,
@@ -118,7 +108,7 @@ export default function PlayerAppBar() {
           {/* DIVIDER */}
           {/* <Box sx={{ flexGrow: 1 }} />  */}
           {/* <DialogSelect /> */}
-          <Volume {...volumeProps} />
+          <Volume {...volumeControl} />
           {/* Playlists, CloseFullscreen, Settings, Download */}
           <PlayerTools {...playerToolsProps} />
           <PlayerSettings {...playerSettingsProps} />

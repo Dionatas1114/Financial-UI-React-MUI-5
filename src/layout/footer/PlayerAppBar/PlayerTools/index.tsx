@@ -10,8 +10,8 @@ interface PlayerToolsProps {
 
 export type { PlayerToolsProps };
 
-export default function PlayerTools(params: PlayerToolsProps) {
-  const { menuId, handleProfileMenuOpen } = params;
+export default function PlayerTools(props: PlayerToolsProps) {
+  const { menuId, handleProfileMenuOpen } = props;
 
   return (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

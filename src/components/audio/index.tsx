@@ -2,8 +2,6 @@ import { Box } from '@mui/material';
 import ReactPlayer from 'react-player';
 import { OnProgressProps } from 'react-player/base';
 
-import { JamendoPlayerProvider } from '../../context/JamendoPlayerProvider';
-
 interface SongInfoProps {
   currentTime: number;
   duration: number;
@@ -30,7 +28,6 @@ interface AudioProps {
   songInfo: SongInfoProps;
   setSongInfo: React.Dispatch<React.SetStateAction<SongInfoProps>>;
   nextSongHandler: () => void;
-  setIsPlaying: (value: boolean) => void;
 }
 
 export type { SongInfoProps, SongProps, AudioProps };
@@ -43,18 +40,8 @@ const Audio = ({
   songInfo,
   setSongInfo,
   nextSongHandler,
-  setIsPlaying,
 }: AudioProps) => {
   const timeUpdateHandler = (state: OnProgressProps) => {
-    // const { playedSeconds, loadedSeconds } = state;
-    // const duration = playerRef.current?.getDuration?.() ?? loadedSeconds;
-
-    // setSongInfo({
-    //   currentTime: Math.round(playedSeconds),
-    //   duration: Math.round(duration),
-    //   volume: songInfo.volume,
-    //   animationPercent: (playedSeconds / duration) * 100,
-    // });
     setSongInfo({
       currentTime: Math.round(state.playedSeconds),
       duration: Math.round(state.loadedSeconds),
@@ -65,7 +52,6 @@ const Audio = ({
 
   return (
     <Box sx={{ display: 'none' }}>
-      {/* <JamendoPlayerProvider> */}
       <ReactPlayer
         url={audioUrl}
         ref={playerRef}
@@ -73,12 +59,8 @@ const Audio = ({
         volume={volume}
         onProgress={timeUpdateHandler}
         onEnded={nextSongHandler}
-        onReady={() => {
-          setIsPlaying(true);
-        }}
         stopOnUnmount
       />
-      {/* </JamendoPlayerProvider> */}
     </Box>
   );
 };
